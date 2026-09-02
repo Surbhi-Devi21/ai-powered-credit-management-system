@@ -1,122 +1,110 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React from 'react';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import ProtectedRoute from './components/layout/ProtectedRoute';
+import ProtectedLayout from './components/layout/ProtectedLayout';
 
-function App() {
-  const [count, setCount] = useState(0)
+// Page Views
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import DashboardPage from './pages/DashboardPage';
+import CustomersPage from './pages/CustomersPage';
+import CustomerDetailPage from './pages/CustomerDetailPage';
+import SettingsPage from './pages/SettingsPage';
+
+// Placeholder views for upcoming modules with 2026 SaaS styling
+const PlaceholderView = ({ title, subtitle, nextModule }) => (
+  <div className="p-8 sm:p-12 rounded-3xl bg-white border border-slate-200/80 shadow-card text-center space-y-4 max-w-2xl mx-auto my-8">
+    <div className="w-12 h-12 rounded-2xl bg-blue-50 text-brand-accent flex items-center justify-center mx-auto border border-blue-100 shadow-sm">
+      <span className="text-xl font-bold">✨</span>
+    </div>
+    <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">{title}</h2>
+    <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto font-medium leading-relaxed">
+      {subtitle}
+    </p>
+    <div className="pt-2">
+      <span className="inline-block px-3.5 py-1 text-xs font-bold rounded-full bg-blue-50 text-brand-accent border border-blue-200/80 shadow-sm">
+        ● Scheduled for {nextModule}
+      </span>
+    </div>
+  </div>
+);
+
+/**
+ * Root Navigation Tree with Auth Provider and Protected Route Guards
+ */
+function AppContent() {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <Routes>
+      {/* ==================================================================== */}
+      {/* Public Authentication Routes                                         */}
+      {/* ==================================================================== */}
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
 
-      <div className="ticks"></div>
+      {/* ==================================================================== */}
+      {/* Protected Shop Owner Application Routes (Wrapped in ProtectedLayout) */}
+      {/* ==================================================================== */}
+      <Route
+        element={
+          <ProtectedRoute>
+            <ProtectedLayout
+              user={user}
+              onLogout={() => {
+                logout();
+                navigate('/login');
+              }}
+              onOpenCreditModal={() => navigate('/customers')}
+              onOpenPaymentModal={() => navigate('/customers')}
+              onOpenSearch={() => navigate('/customers')}
+              pageTitle="Khata & Credit Hub"
+              pageSubtitle="Real-Time Retail Customer Ledger"
+            />
+          </ProtectedRoute>
+        }
+      >
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/customers" element={<CustomersPage />} />
+        <Route path="/customers/:id" element={<CustomerDetailPage />} />
+        <Route
+          path="/reminders"
+          element={
+            <PlaceholderView
+              title="WhatsApp Payment Reminders & Overdue Tracker"
+              subtitle="Generate pre-filled, polite WhatsApp reminders for overdue accounts with single-click delivery."
+              nextModule="Module 7: Reminders Module"
+            />
+          }
+        />
+        <Route
+          path="/ai-insights"
+          element={
+            <PlaceholderView
+              title="AI Business Assistant (OpenRouter Grounded)"
+              subtitle="Ask natural language questions about your live store collections, top debtor risks, and sales velocity."
+              nextModule="Module 8: AI Business Insights"
+            />
+          }
+        />
+        <Route path="/settings" element={<SettingsPage />} />
+      </Route>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      {/* ==================================================================== */}
+      {/* Fallback & Root Redirects                                            */}
+      {/* ==================================================================== */}
+      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+      <Route path="*" element={<Navigate to="/dashboard" replace />} />
+    </Routes>
+  );
 }
 
-export default App
+export default function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
+  );
+}
