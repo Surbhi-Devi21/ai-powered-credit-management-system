@@ -16,7 +16,7 @@ import Button from '../components/common/Button';
 import Card from '../components/common/Card';
 
 /**
- * Modern 2026 SaaS Customer Directory Page (Stripe / Mercury / Linear style)
+ * Premium SaaS Customer Directory Page (Stripe / Mercury / Linear style)
  * Large floating metric cards, instant search, status filter pills, and responsive customer cards.
  */
 export default function CustomersPage() {
@@ -108,17 +108,17 @@ export default function CustomersPage() {
     }).format(val);
 
   return (
-    <div className="space-y-6 sm:space-y-8 max-w-7xl mx-auto pb-12">
-      {/* Top Header & Overview Metric Strip */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 sm:p-7 rounded-3xl bg-white border border-slate-200/80 shadow-card">
-        <div className="space-y-1">
+    <div className="space-y-8 sm:space-y-10 max-w-7xl mx-auto pb-16">
+      {/* Top Header & Overview Metric Panel */}
+      <Card padding="lg" className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="space-y-1.5">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-blue-500" />
             <span className="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest">
               Directory Ledger
             </span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
             Customer Khata Accounts
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 font-medium">
@@ -130,65 +130,66 @@ export default function CustomersPage() {
         <div className="flex items-center gap-3 self-start md:self-auto">
           <Button
             variant="accent"
-            size="md"
+            size="lg"
             onClick={() => setIsFormOpen(true)}
             icon={UserPlus}
+            className="shadow-button"
           >
             + Add New Customer
           </Button>
         </div>
-      </div>
+      </Card>
 
-      {/* Directory Quick Metric Badges */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
-        <Card padding="sm" className="flex items-center justify-between">
+      {/* Directory Quick Metric Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
+        <Card padding="md" className="flex items-center justify-between">
           <div className="space-y-1">
             <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">
               Total Market Dues
             </span>
-            <div className="text-xl sm:text-2xl font-extrabold text-rose-600 tabular-nums">
+            <div className="text-2xl sm:text-3xl font-extrabold text-rose-600 tabular-nums">
               {formatCurrency(stats.totalOutstanding)}
             </div>
             <p className="text-xs text-slate-400 font-medium">Pending collection</p>
           </div>
-          <div className="w-10 h-10 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center border border-rose-100 shadow-sm">
-            <TrendingUp className="w-5 h-5" />
+          <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center shadow-soft">
+            <TrendingUp className="w-6 h-6" />
           </div>
         </Card>
 
-        <Card padding="sm" className="flex items-center justify-between">
+        <Card padding="md" className="flex items-center justify-between">
           <div className="space-y-1">
             <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">
               Total Customers
             </span>
-            <div className="text-xl sm:text-2xl font-extrabold text-slate-900 tabular-nums">
+            <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tabular-nums">
               {stats.totalCustomers}
             </div>
             <p className="text-xs text-slate-400 font-medium">Registered in directory</p>
           </div>
-          <div className="w-10 h-10 rounded-2xl bg-blue-50 text-brand-accent flex items-center justify-center border border-blue-100 shadow-sm">
-            <Users className="w-5 h-5" />
+          <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shadow-soft">
+            <Users className="w-6 h-6" />
           </div>
         </Card>
 
-        <Card padding="sm" className="flex items-center justify-between">
+        <Card padding="md" className="flex items-center justify-between">
           <div className="space-y-1">
             <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">
               Active Debtors
             </span>
-            <div className="text-xl sm:text-2xl font-extrabold text-slate-900 tabular-nums">
+            <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tabular-nums">
               {stats.activeDebtors} Customers
             </div>
             <p className="text-xs text-slate-400 font-medium">Currently owe money</p>
           </div>
-          <div className="w-10 h-10 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-100 shadow-sm">
-            <CheckCircle2 className="w-5 h-5" />
+          <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center shadow-soft">
+            <CheckCircle2 className="w-6 h-6" />
           </div>
         </Card>
       </div>
 
       {/* Search & Filter Toolbar */}
-      <div className="space-y-4">
+      <div className="space-y-5">
         <CustomerSearch
           value={search}
           onChange={(val) => {
@@ -221,8 +222,8 @@ export default function CustomersPage() {
 
       {/* Customer Cards Grid or Empty State */}
       {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          <Skeleton variant="card" height={220} count={6} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <Skeleton variant="card" height={240} count={6} />
         </div>
       ) : customers.length === 0 ? (
         <EmptyState
@@ -237,8 +238,8 @@ export default function CustomersPage() {
           onAction={() => setIsFormOpen(true)}
         />
       ) : (
-        <div className="space-y-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="space-y-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             <AnimatePresence mode="popLayout">
               {customers.map((cust) => (
                 <CustomerCard key={cust._id} customer={cust} />

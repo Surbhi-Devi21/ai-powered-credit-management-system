@@ -5,7 +5,7 @@ import Input from '../common/Input';
 import Button from '../common/Button';
 
 /**
- * Modern 2026 SaaS Add/Edit Customer Modal Form Component
+ * Premium SaaS Add/Edit Customer Modal Form Component
  * Form validation, auto-focus, Indian phone formatting, and opening balance support.
  */
 export default function CustomerForm({
@@ -115,7 +115,7 @@ export default function CustomerForm({
         </>
       }
     >
-      <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+      <form onSubmit={handleSubmit} className="space-y-5" noValidate>
         {/* Customer Full Name */}
         <Input
           label="Customer Full Name"
@@ -156,7 +156,7 @@ export default function CustomerForm({
         />
 
         {/* Credit Limit & Opening Balance */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <Input
             label="Credit Limit (Optional)"
             type="number"

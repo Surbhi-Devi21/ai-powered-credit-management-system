@@ -3,6 +3,20 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --bg-canvas: #F6F8FC;
+    --bg-card: #FFFFFF;
+    --text-primary: #111827;
+    --text-secondary: #64748B;
+    --border-saas: rgba(15, 23, 42, 0.06);
+    --border-subtle: rgba(15, 23, 42, 0.03);
+    --shadow-soft: 0 4px 20px -2px rgba(15, 23, 42, 0.03), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+    --shadow-card-hover: 0 12px 32px -4px rgba(15, 23, 42, 0.06), 0 4px 10px -2px rgba(15, 23, 42, 0.02);
+    --radius-card: 28px;
+    --radius-input: 16px;
+    --radius-button: 9999px;
+  }
+
   html {
     font-family: 'Plus Jakarta Sans', Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-tap-highlight-color: transparent;
@@ -10,17 +24,129 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #F6F8FC;
+    color: #111827;
   }
 
   body {
-    @apply bg-surface-canvas text-brand-dark min-h-screen overflow-x-hidden;
-    background-image: radial-gradient(rgba(226, 232, 240, 0.4) 1px, transparent 1px);
-    background-size: 24px 24px;
+    background-color: #F6F8FC;
+    color: #111827;
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.5;
+    letter-spacing: -0.011em;
   }
 
-  /* Force Tabular Numbers across all monetary and numerical elements for crisp alignment */
+  /* Improved Typography Scale & Hierarchy */
+  h1, .saas-h1 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.035em;
+    color: #111827;
+  }
+
+  h2, .saas-h2 {
+    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+    color: #111827;
+  }
+
+  h3, .saas-h3 {
+    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    color: #111827;
+  }
+
+  h4, .saas-h4 {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.015em;
+    color: #111827;
+  }
+
+  p, .saas-p {
+    color: #64748B;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+  }
+
+  /* Tabular numbers for clean financial metric alignment */
   .tabular-nums {
     font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ========================================================================== */
+/* Reusable SaaS Component Classes                                           */
+/* ========================================================================== */
+@layer components {
+  /* 1. Page Container (Spacious whitespace & responsive max-width) */
+  .page-container,
+  .saas-page-container {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-6 sm:py-8 lg:py-10 space-y-8 sm:space-y-10;
+  }
+
+  /* 2. Section (Clean breathing vertical flow) */
+  .section-container,
+  .saas-section {
+    @apply space-y-6 sm:space-y-8;
+  }
+
+  /* 3. Surface (White 28px card with soft diffuse shadow & hairline border) */
+  .surface-card,
+  .saas-surface {
+    @apply bg-white rounded-[28px] p-6 sm:p-8 lg:p-10 border border-slate-900/[0.06] shadow-card transition-all duration-300;
+  }
+
+  .surface-card-hover,
+  .saas-surface-hover {
+    @apply bg-white rounded-[28px] p-6 sm:p-8 lg:p-10 border border-slate-900/[0.06] shadow-card hover:shadow-cardHover hover:-translate-y-0.5 transition-all duration-300;
+  }
+
+  /* 4. Metric Card (Floating KPI widget with generous padding & hover lift) */
+  .metric-card,
+  .saas-metric-card {
+    @apply bg-white rounded-[28px] p-6 sm:p-7 border border-slate-900/[0.06] shadow-card hover:shadow-cardHover hover:-translate-y-1 transition-all duration-300 relative overflow-hidden;
+  }
+
+  /* 5. Glass Card (Translucent floating panel with backdrop blur) */
+  .glass-card,
+  .saas-glass-card {
+    @apply bg-white/80 backdrop-blur-md rounded-[28px] p-6 sm:p-8 border border-white/60 shadow-card transition-all duration-300;
+  }
+
+  /* 6. Sidebar Item (Rounded item with clean hover & active states) */
+  .sidebar-item,
+  .saas-sidebar-item {
+    @apply flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 transition-all duration-200;
+  }
+
+  .sidebar-item-active,
+  .saas-sidebar-item-active {
+    @apply flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-bold text-slate-900 bg-white shadow-subtle border border-slate-900/[0.05] transition-all duration-200;
+  }
+
+  /* 7. Navigation Button (Rounded full with micro-lift and shadow) */
+  .nav-button,
+  .saas-nav-button {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-slate-700 bg-white border border-slate-900/[0.06] shadow-button hover:shadow-buttonHover hover:text-slate-900 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200;
+  }
+
+  .nav-button-primary,
+  .saas-nav-button-primary {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-white bg-slate-900 hover:bg-slate-800 shadow-button hover:shadow-buttonHover hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200;
+  }
+
+  /* 8. Status Badge (Soft pastel pill badge with indicator dot) */
+  .status-badge,
+  .saas-status-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-tight border border-transparent shadow-subtle;
   }
 }
 
@@ -35,10 +161,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #E2E8F0;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #CBD5E1;
 }

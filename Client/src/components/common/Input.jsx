@@ -2,8 +2,8 @@ import React, { forwardRef } from 'react';
 import { AlertCircle } from 'lucide-react';
 
 /**
- * Modern 2026 SaaS Input Field Component (Linear / Mercury / Stripe style)
- * Features subtle inner shadows, sleek focus rings, crisp prefixes, and validation states.
+ * Premium SaaS Input Field Component (Linear / Stripe style)
+ * Features rounded-2xl container, soft hairline borders, subtle focus rings, and clean validation states.
  */
 const Input = forwardRef(
   (
@@ -32,12 +32,12 @@ const Input = forwardRef(
     const inputId = id || name || `input-${Math.random().toString(36).substring(2, 9)}`;
 
     return (
-      <div className={`w-full space-y-1.5 ${wrapperClassName}`}>
+      <div className={`w-full space-y-2 ${wrapperClassName}`}>
         {/* Field Label */}
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-xs font-semibold text-slate-700 tracking-tight"
+            className="block text-xs font-bold text-slate-700 tracking-tight"
           >
             {label} {required && <span className="text-rose-500">*</span>}
           </label>
@@ -45,22 +45,22 @@ const Input = forwardRef(
 
         {/* Input Container */}
         <div
-          className={`relative flex items-stretch rounded-xl bg-white transition-all duration-200 border ${
+          className={`relative flex items-stretch rounded-2xl bg-white transition-all duration-200 border ${
             error
-              ? 'border-rose-400 ring-2 ring-rose-500/10'
-              : 'border-slate-200/90 shadow-sm focus-within:border-brand-accent focus-within:ring-2 focus-within:ring-brand-accent/20 hover:border-slate-300'
+              ? 'border-rose-300 ring-2 ring-rose-500/10'
+              : 'border-slate-200/80 shadow-soft focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/10 hover:border-slate-300'
           }`}
         >
           {/* Currency or Static Prefix (e.g., ₹) */}
           {prefix && (
-            <span className="inline-flex items-center px-3.5 rounded-l-xl border-r border-slate-200/80 bg-slate-50 text-slate-500 text-sm font-bold select-none">
+            <span className="inline-flex items-center px-4 rounded-l-2xl border-r border-slate-100 bg-slate-50/80 text-slate-600 text-sm font-bold select-none">
               {prefix}
             </span>
           )}
 
           {/* Left Icon */}
           {Icon && (
-            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
               <Icon className="w-4 h-4" />
             </div>
           )}
@@ -78,15 +78,15 @@ const Input = forwardRef(
             placeholder={placeholder}
             inputMode={inputMode}
             className={`block w-full bg-transparent text-slate-900 text-sm placeholder:text-slate-400 transition-colors
-              ${prefix ? 'rounded-r-xl pl-3 pr-3.5' : Icon ? 'pl-10 pr-3.5 rounded-xl' : 'px-3.5 rounded-xl'}
+              ${prefix ? 'rounded-r-2xl pl-3.5 pr-4' : Icon ? 'pl-11 pr-4 rounded-2xl' : 'px-4 rounded-2xl'}
               ${suffix ? 'rounded-r-none pr-2' : ''}
-              h-10 disabled:bg-slate-50 disabled:text-slate-400 disabled:cursor-not-allowed focus:outline-none ${className}`}
+              h-11 sm:h-12 disabled:bg-slate-50 disabled:text-slate-400 disabled:cursor-not-allowed focus:outline-none ${className}`}
             {...props}
           />
 
           {/* Static Suffix */}
           {suffix && (
-            <span className="inline-flex items-center px-3 rounded-r-xl border-l border-slate-200/80 bg-slate-50 text-slate-500 text-xs font-semibold select-none">
+            <span className="inline-flex items-center px-3.5 rounded-r-2xl border-l border-slate-100 bg-slate-50/80 text-slate-500 text-xs font-bold select-none">
               {suffix}
             </span>
           )}
@@ -102,7 +102,7 @@ const Input = forwardRef(
 
         {/* Helper Description */}
         {!error && helperText && (
-          <p className="text-xs text-slate-400 leading-relaxed">{helperText}</p>
+          <p className="text-xs text-slate-400 font-medium leading-relaxed">{helperText}</p>
         )}
       </div>
     );

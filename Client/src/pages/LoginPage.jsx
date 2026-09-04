@@ -62,32 +62,34 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center px-4 py-12 bg-slate-50 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col justify-center items-center px-4 py-12 bg-[#F7F9FC] relative overflow-hidden">
       {/* Background Decorative Mesh Gradients */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-b from-blue-100/60 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-b from-blue-100/40 to-transparent rounded-full blur-3xl pointer-events-none" />
 
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="w-full max-w-md relative z-10 space-y-6"
+        className="w-full max-w-md relative z-10 space-y-8"
       >
         {/* Brand Header */}
-        <div className="text-center space-y-2">
-          <div className="w-14 h-14 rounded-3xl bg-slate-900 text-white flex items-center justify-center mx-auto shadow-md border border-slate-700/60">
-            <Store className="w-7 h-7" />
+        <div className="text-center space-y-3">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white flex items-center justify-center mx-auto shadow-sm border border-slate-700/50">
+            <Store className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-            Sign in to Khata
-          </h1>
-          <p className="text-xs sm:text-sm text-slate-500 font-medium">
-            Enter your credentials to access your store financial ledger.
-          </p>
+          <div className="space-y-1">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              Sign in to Khata Hub
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-500 font-medium">
+              Enter your credentials to access your store financial ledger.
+            </p>
+          </div>
         </div>
 
-        {/* Floating Card */}
-        <div className="bg-white rounded-3xl border border-slate-200/80 shadow-card p-7 sm:p-9 space-y-6">
-          <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+        {/* Floating White Card */}
+        <div className="bg-white rounded-3xl border border-slate-100/80 shadow-card p-8 sm:p-10 space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-5" noValidate>
             <Input
               label="Email Address"
               type="email"
@@ -118,7 +120,7 @@ export default function LoginPage() {
               variant="primary"
               size="lg"
               isLoading={loading}
-              className="w-full mt-2"
+              className="w-full mt-2 rounded-full shadow-sm hover:shadow-md transition-all"
               icon={ArrowRight}
               iconPosition="right"
             >
@@ -134,11 +136,11 @@ export default function LoginPage() {
         </div>
 
         {/* Bottom Signup Link */}
-        <p className="text-center text-xs text-slate-500 font-medium">
+        <p className="text-center text-xs sm:text-sm text-slate-500 font-medium">
           Don't have a shop account yet?{' '}
           <Link
             to="/register"
-            className="font-extrabold text-brand-accent hover:text-brand-accentHover underline transition-colors"
+            className="font-bold text-brand-accent hover:text-brand-accentHover underline transition-colors"
           >
             Create New Store Account
           </Link>

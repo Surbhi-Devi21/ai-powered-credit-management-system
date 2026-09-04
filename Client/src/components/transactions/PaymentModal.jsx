@@ -5,7 +5,7 @@ import Input from '../common/Input';
 import Button from '../common/Button';
 
 /**
- * Modern 2026 SaaS Record Payment (Jama) Modal Component
+ * Premium SaaS Record Payment (Jama) Modal Component
  * Records cash or digital payments received and reduces customer debt balance.
  */
 export default function PaymentModal({
@@ -95,21 +95,22 @@ export default function PaymentModal({
             Cancel
           </Button>
           <Button
-            variant="success"
+            variant="paymentGradient"
             size="md"
             onClick={handleSubmit}
             isLoading={isLoading}
             icon={ArrowDownLeft}
+            className="shadow-button"
           >
             Confirm & Record Payment
           </Button>
         </>
       }
     >
-      <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+      <form onSubmit={handleSubmit} className="space-y-5" noValidate>
         {/* Quick Settle Full Amount Chip */}
         {currentOutstanding > 0 && (
-          <div className="flex items-center justify-between p-3 rounded-2xl bg-emerald-50 border border-emerald-200/80 text-xs">
+          <div className="flex items-center justify-between p-3.5 rounded-2xl bg-emerald-50 border border-emerald-100 text-xs shadow-soft">
             <span className="text-emerald-900 font-medium">
               Pending Dues:{' '}
               <strong className="font-extrabold text-emerald-700 tabular-nums">
@@ -142,19 +143,19 @@ export default function PaymentModal({
         />
 
         {/* Payment Mode Selector */}
-        <div className="space-y-1.5">
-          <label className="block text-xs font-semibold text-slate-700 tracking-tight">
+        <div className="space-y-2">
+          <label className="block text-xs font-bold text-slate-700 tracking-tight">
             Payment Mode <span className="text-rose-500">*</span>
           </label>
-          <div className="relative rounded-xl shadow-sm">
-            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+          <div className="relative rounded-2xl shadow-soft">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
               <CreditCard className="w-4 h-4" />
             </div>
             <select
               name="paymentMode"
               value={formData.paymentMode}
               onChange={handleChange}
-              className="block w-full bg-white text-slate-900 text-sm border border-slate-200/90 rounded-xl pl-10 pr-8 h-10 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 cursor-pointer shadow-sm"
+              className="block w-full bg-white text-slate-900 text-sm border border-slate-200/80 rounded-2xl pl-11 pr-8 h-12 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 cursor-pointer shadow-soft font-medium"
             >
               {paymentModes.map((mode) => (
                 <option key={mode.value} value={mode.value}>

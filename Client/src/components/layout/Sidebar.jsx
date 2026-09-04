@@ -7,13 +7,19 @@ import {
   Sparkles,
   Settings,
   LogOut,
-  Store,
+  CreditCard,
   ChevronRight,
 } from 'lucide-react';
 
 /**
- * Modern 2026 SaaS Desktop Sidebar Component (Linear / Notion / Stripe style)
- * Clean hairline border, active tab indicator pills, shop branding, and owner profile card.
+ * Version 3: Premium Floating SaaS Sidebar (Stripe / Mercury / Linear style)
+ * Features:
+ * - Floating white card with 32px radius
+ * - Ultra-soft diffuse shadow
+ * - Geometric logo header with live status
+ * - Icons inside rounded squares
+ * - Pill active navigation items
+ * - High-contrast owner profile card
  */
 export default function Sidebar({
   shopName = 'My Retail Store',
@@ -30,31 +36,36 @@ export default function Sidebar({
   ];
 
   return (
-    <aside className="hidden lg:flex flex-col w-64 h-screen sticky top-0 bg-white border-r border-slate-200/80 shadow-sm flex-shrink-0 z-30 select-none">
-      {/* Top Shop Branding Header */}
-      <div className="p-5 border-b border-slate-100">
-        <div className="flex items-center gap-3">
-          <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center text-white shadow-md shadow-slate-900/10 flex-shrink-0 border border-slate-700/40">
-            <Store className="w-5 h-5" />
+    <aside className="hidden lg:flex flex-col w-72 h-[calc(100vh-3rem)] sticky top-6 my-auto bg-white rounded-[32px] border border-slate-900/[0.06] shadow-card flex-shrink-0 z-30 select-none overflow-hidden transition-all duration-300">
+      {/* Top Logo & Shop Branding */}
+      <div className="p-6 pb-5 border-b border-slate-100/60">
+        <div className="flex items-center gap-3.5">
+          {/* Geometric Logo Container */}
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center text-white shadow-soft flex-shrink-0 border border-slate-700/40">
+            <CreditCard className="w-6 h-6 text-blue-400" />
           </div>
+
           <div className="min-w-0 flex-1">
             <h2 className="font-extrabold text-sm text-slate-900 truncate tracking-tight">
               {shopName}
             </h2>
             <div className="flex items-center gap-1.5 mt-0.5">
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider truncate">
-                {businessCategory}
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider truncate">
+                {businessCategory} Hub
               </span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Main Navigation Links */}
-      <nav className="flex-1 p-3.5 space-y-1.5 overflow-y-auto">
-        <div className="px-3 py-1.5 text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">
-          Main Ledger
+      {/* Navigation Section */}
+      <nav className="flex-1 px-4 py-5 space-y-2 overflow-y-auto">
+        <div className="px-3.5 pb-2 text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">
+          Main Menu
         </div>
 
         {navItems.map((item) => {
@@ -64,46 +75,79 @@ export default function Sidebar({
               key={item.path}
               to={item.path}
               className={({ isActive }) =>
-                `flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all duration-200 ${
+                `flex items-center justify-between px-3.5 py-3 rounded-2xl text-xs font-bold transition-all duration-200 group ${
                   isActive
-                    ? 'bg-slate-900 text-white shadow-sm shadow-slate-900/20'
+                    ? 'bg-slate-900 text-white shadow-button'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                 }`
               }
             >
-              <div className="flex items-center gap-3">
-                <Icon className="w-4 h-4 flex-shrink-0" />
-                <span>{item.name}</span>
-              </div>
+              {({ isActive }) => (
+                <>
+                  <div className="flex items-center gap-3.5">
+                    {/* Icon inside rounded square */}
+                    <div
+                      className={`w-9 h-9 rounded-xl flex items-center justify-center transition-colors ${
+                        isActive
+                          ? 'bg-white/15 text-white'
+                          : 'bg-slate-100/80 text-slate-500 group-hover:bg-slate-200/70 group-hover:text-slate-900'
+                      }`}
+                    >
+                      <Icon className="w-4 h-4" />
+                    </div>
+                    <span className="tracking-tight text-xs font-bold">{item.name}</span>
+                  </div>
 
-              {item.badge && (
-                <span className="text-[10px] font-extrabold px-1.5 py-0.5 rounded-md bg-blue-500 text-white shadow-sm">
-                  {item.badge}
-                </span>
+                  {item.badge ? (
+                    <span
+                      className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-subtle ${
+                        isActive
+                          ? 'bg-blue-500 text-white'
+                          : 'bg-blue-50 text-blue-600 border border-blue-100'
+                      }`}
+                    >
+                      {item.badge}
+                    </span>
+                  ) : (
+                    <ChevronRight
+                      className={`w-3.5 h-3.5 transition-transform ${
+                        isActive
+                          ? 'text-white/60 translate-x-0.5'
+                          : 'text-slate-300 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5'
+                      }`}
+                    />
+                  )}
+                </>
               )}
             </NavLink>
           );
         })}
       </nav>
 
-      {/* Bottom Owner Profile & Logout */}
-      <div className="p-4 border-t border-slate-100 bg-slate-50/60">
-        <div className="flex items-center justify-between p-2.5 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+      {/* Bottom Profile Card */}
+      <div className="p-4 border-t border-slate-100/80 bg-slate-50/50">
+        <div className="flex items-center justify-between p-3 rounded-2xl bg-white border border-slate-900/[0.05] shadow-subtle hover:shadow-soft transition-all">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center text-xs font-extrabold flex-shrink-0 shadow-sm">
+            {/* Owner Avatar */}
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white flex items-center justify-center text-sm font-extrabold flex-shrink-0 shadow-subtle border border-slate-700/50">
               {ownerName ? ownerName.charAt(0).toUpperCase() : 'O'}
             </div>
             <div className="min-w-0">
-              <div className="text-xs font-extrabold text-slate-900 truncate tracking-tight">{ownerName}</div>
-              <div className="text-[10px] font-semibold text-slate-400">Shop Owner</div>
+              <div className="text-xs font-extrabold text-slate-900 truncate tracking-tight">
+                {ownerName}
+              </div>
+              <div className="flex items-center gap-1.5 text-[10px] font-semibold text-slate-400 mt-0.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                <span>Shop Owner</span>
+              </div>
             </div>
           </div>
 
           <button
             type="button"
             onClick={onLogout}
-            title="Log Out"
-            className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
+            title="Sign Out"
+            className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-colors cursor-pointer"
           >
             <LogOut className="w-4 h-4" />
           </button>

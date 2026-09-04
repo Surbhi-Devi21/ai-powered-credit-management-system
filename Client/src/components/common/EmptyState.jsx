@@ -3,8 +3,8 @@ import { Layers } from 'lucide-react';
 import Button from './Button';
 
 /**
- * Modern 2026 SaaS Empty State Component (Notion / Stripe style)
- * Clean icon badge with frosted gradient background, bold typography, and clear CTA.
+ * Premium SaaS Empty State Component
+ * Clean icon container with soft tints, bold typography, and clear action CTA.
  */
 export default function EmptyState({
   icon: Icon = Layers,
@@ -16,18 +16,18 @@ export default function EmptyState({
 }) {
   return (
     <div
-      className={`py-14 px-6 flex flex-col items-center justify-center text-center space-y-4 bg-white rounded-3xl border border-dashed border-slate-200 shadow-card ${className}`}
+      className={`py-16 px-8 flex flex-col items-center justify-center text-center space-y-4 bg-white rounded-3xl shadow-card border border-slate-100 ${className}`}
     >
-      {/* Frosted Icon Circle */}
-      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100 text-slate-500 flex items-center justify-center border border-slate-200/80 shadow-sm">
-        <Icon className="w-6 h-6" />
+      {/* Icon Container */}
+      <div className="w-16 h-16 rounded-2xl bg-slate-50 text-slate-400 flex items-center justify-center border border-slate-100 shadow-soft">
+        <Icon className="w-7 h-7" />
       </div>
 
-      <div className="max-w-sm space-y-1">
-        <h4 className="text-base font-bold text-slate-900 tracking-tight">
+      <div className="max-w-sm space-y-1.5">
+        <h4 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">
           {title}
         </h4>
-        <p className="text-xs text-slate-500 leading-relaxed">{description}</p>
+        <p className="text-xs sm:text-sm text-slate-500 font-medium leading-relaxed">{description}</p>
       </div>
 
       {actionLabel && onAction && (

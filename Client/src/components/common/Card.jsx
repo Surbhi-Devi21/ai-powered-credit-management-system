@@ -2,8 +2,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 /**
- * Modern 2026 SaaS Large Floating Surface Card Component (Stripe / Mercury / Linear style)
- * Provides 18px-24px rounded corners, hairline micro-borders, ambient multi-layer drop shadows, and spring hover elevation.
+ * Premium SaaS White Floating Card Component (Stripe / Linear / Mercury style)
+ * Features 28px rounded corners (rounded-3xl / rounded-[28px]), pure white background,
+ * very soft shadow, generous padding, and a smooth 300ms translateY hover elevation.
  */
 export default function Card({
   children,
@@ -15,24 +16,24 @@ export default function Card({
 }) {
   const paddingClasses = {
     none: 'p-0',
-    sm: 'p-4 sm:p-5',
-    md: 'p-5 sm:p-7',
-    lg: 'p-6 sm:p-8 lg:p-9',
+    sm: 'p-5 sm:p-6',
+    md: 'p-6 sm:p-8',
+    lg: 'p-8 sm:p-10',
   };
 
   const Component = hoverable ? motion.div : 'div';
   const motionProps = hoverable
     ? {
         whileHover: { y: -3 },
-        transition: { type: 'spring', stiffness: 400, damping: 25 },
+        transition: { duration: 0.3, ease: 'easeOut' },
       }
     : {};
 
   return (
     <Component
       onClick={onClick}
-      className={`bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-card transition-shadow duration-200 ${
-        hoverable ? 'hover:shadow-hover cursor-pointer hover:border-slate-300' : ''
+      className={`bg-white rounded-3xl shadow-card border border-slate-100/80 transition-all duration-300 ${
+        hoverable ? 'hover:shadow-hover cursor-pointer' : ''
       } ${paddingClasses[padding] || paddingClasses.md} ${className}`}
       {...motionProps}
       {...props}

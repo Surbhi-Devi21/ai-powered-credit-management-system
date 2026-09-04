@@ -5,7 +5,7 @@ import Input from '../common/Input';
 import Button from '../common/Button';
 
 /**
- * Modern 2026 SaaS Give Credit (Udhar) Modal Component
+ * Premium SaaS Give Credit (Udhar) Modal Component
  * Records new goods given on credit and updates customer debt balance.
  */
 export default function CreditModal({
@@ -70,18 +70,19 @@ export default function CreditModal({
             Cancel
           </Button>
           <Button
-            variant="danger"
+            variant="creditGradient"
             size="md"
             onClick={handleSubmit}
             isLoading={isLoading}
             icon={ArrowUpRight}
+            className="shadow-button"
           >
             Confirm & Add Credit
           </Button>
         </>
       }
     >
-      <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+      <form onSubmit={handleSubmit} className="space-y-5" noValidate>
         {/* Credit Amount */}
         <Input
           label="Credit Amount (Udhar)"
@@ -110,7 +111,7 @@ export default function CreditModal({
         />
 
         {/* Date Inputs Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <Input
             label="Posting Date"
             type="date"

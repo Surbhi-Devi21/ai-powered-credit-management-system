@@ -2,8 +2,8 @@ import React from 'react';
 import { Search, X } from 'lucide-react';
 
 /**
- * Modern 2026 SaaS Customer Search Bar Component
- * Sleek rounded input with icon prefix and quick clear button.
+ * Premium SaaS Customer Search Bar Component
+ * Large floating search input with rounded-full radius and soft shadow.
  */
 export default function CustomerSearch({
   value = '',
@@ -13,7 +13,7 @@ export default function CustomerSearch({
 }) {
   return (
     <div className="relative w-full">
-      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+      <div className="absolute inset-y-0 left-0 pl-4.5 flex items-center pointer-events-none text-slate-400">
         <Search className="w-4 h-4" />
       </div>
 
@@ -22,14 +22,14 @@ export default function CustomerSearch({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="block w-full bg-white text-slate-900 text-xs sm:text-sm border border-slate-200/90 rounded-2xl pl-11 pr-10 h-12 shadow-sm placeholder:text-slate-400 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all"
+        className="block w-full bg-white text-slate-900 text-xs sm:text-sm border border-slate-200/80 rounded-full pl-12 pr-11 h-12 shadow-soft placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all font-medium"
       />
 
       {value && (
         <button
           type="button"
           onClick={onClear}
-          className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-700 transition-colors"
+          className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-700 transition-colors cursor-pointer"
         >
           <X className="w-4 h-4" />
           <span className="sr-only">Clear search</span>

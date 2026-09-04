@@ -93,52 +93,59 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="space-y-6 sm:space-y-8 max-w-4xl mx-auto pb-16">
+    <div className="space-y-8 sm:space-y-10 max-w-4xl mx-auto pb-16">
       {/* Header Banner Card */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 sm:p-8 rounded-3xl bg-white border border-slate-200/80 shadow-card">
-        <div className="flex items-center gap-4 sm:gap-5">
-          <div className="w-16 h-16 rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 text-white flex items-center justify-center font-extrabold text-2xl shadow-md border border-slate-700/60">
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 p-8 sm:p-10 rounded-3xl bg-white border border-slate-100/80 shadow-card hover:shadow-cardHover transition-all duration-300"
+      >
+        <div className="flex items-center gap-5 sm:gap-6">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white flex items-center justify-center font-extrabold text-2xl sm:text-3xl shadow-sm border border-slate-700/50">
             {user?.name ? user.name.charAt(0).toUpperCase() : 'O'}
           </div>
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              <span className="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 ring-4 ring-emerald-50" />
+              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">
                 Owner Account
               </span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
               {user?.businessName || 'My Retail Store'}
             </h2>
-            <p className="text-xs text-slate-500 font-medium">{user?.email}</p>
+            <p className="text-xs sm:text-sm text-slate-500 font-medium">{user?.email}</p>
           </div>
         </div>
 
         <Button
           variant="secondary"
-          size="sm"
+          size="md"
           onClick={logout}
           icon={LogOut}
-          className="self-start sm:self-auto text-rose-600 hover:text-rose-700 hover:bg-rose-50 border-rose-200"
+          className="self-start sm:self-auto text-rose-600 hover:text-rose-700 hover:bg-rose-50 border-rose-200/80 rounded-full"
         >
           Sign Out
         </Button>
-      </div>
+      </motion.div>
 
       {/* Profile & Business Details Card */}
-      <Card className="p-6 sm:p-8 space-y-6">
-        <div className="space-y-1 pb-4 border-b border-slate-100">
-          <h3 className="text-base font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
-            <Store className="w-4 h-4 text-brand-accent" />
+      <Card className="p-8 sm:p-10 space-y-8">
+        <div className="space-y-1.5 pb-6 border-b border-slate-100">
+          <h3 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-blue-50 text-brand-accent flex items-center justify-center">
+              <Store className="w-4 h-4" />
+            </div>
             <span>Store & Profile Settings</span>
           </h3>
-          <p className="text-xs text-slate-500 font-medium">
+          <p className="text-xs sm:text-sm text-slate-500 font-medium pl-10">
             Manage your retail store name, business category, and contact details.
           </p>
         </div>
 
-        <form onSubmit={handleProfileSubmit} className="space-y-5">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <form onSubmit={handleProfileSubmit} className="space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
             <Input
               label="Owner Full Name"
               type="text"
@@ -163,12 +170,12 @@ export default function SettingsPage() {
               required
             />
 
-            <div className="space-y-1.5">
-              <label className="block text-xs font-semibold text-slate-700 tracking-tight">
+            <div className="space-y-2">
+              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
                 Business Category
               </label>
-              <div className="relative rounded-xl shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <div className="relative rounded-2xl shadow-sm">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
                   <Building className="w-4 h-4" />
                 </div>
                 <select
@@ -179,7 +186,7 @@ export default function SettingsPage() {
                       businessCategory: e.target.value,
                     }))
                   }
-                  className="block w-full bg-white text-slate-900 text-sm border border-slate-200/90 rounded-xl pl-10 pr-8 h-10 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 cursor-pointer shadow-sm font-medium"
+                  className="block w-full bg-white text-slate-900 text-sm border border-slate-200/90 rounded-2xl pl-11 pr-8 h-11 sm:h-12 focus:outline-none focus:border-brand-accent focus:ring-4 focus:ring-brand-accent/10 cursor-pointer shadow-sm font-medium transition-all"
                 >
                   <option value="kirana">Kirana / Grocery Store</option>
                   <option value="medical">Medical / Pharmacy</option>
@@ -205,13 +212,14 @@ export default function SettingsPage() {
             />
           </div>
 
-          <div className="pt-4 border-t border-slate-100 flex justify-end">
+          <div className="pt-6 border-t border-slate-100 flex justify-end">
             <Button
               type="submit"
               variant="primary"
-              size="md"
+              size="lg"
               isLoading={profileLoading}
               icon={Save}
+              className="rounded-full shadow-sm hover:shadow-md transition-all"
             >
               Save Profile Changes
             </Button>
@@ -220,19 +228,21 @@ export default function SettingsPage() {
       </Card>
 
       {/* Security & Password Card */}
-      <Card className="p-6 sm:p-8 space-y-6">
-        <div className="space-y-1 pb-4 border-b border-slate-100">
-          <h3 className="text-base font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
-            <Lock className="w-4 h-4 text-rose-600" />
+      <Card className="p-8 sm:p-10 space-y-8">
+        <div className="space-y-1.5 pb-6 border-b border-slate-100">
+          <h3 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center">
+              <Lock className="w-4 h-4" />
+            </div>
             <span>Account Security & Password</span>
           </h3>
-          <p className="text-xs text-slate-500 font-medium">
+          <p className="text-xs sm:text-sm text-slate-500 font-medium pl-10">
             Update your account login password to keep your store finances safe.
           </p>
         </div>
 
-        <form onSubmit={handlePasswordSubmit} className="space-y-5">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <form onSubmit={handlePasswordSubmit} className="space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <Input
               label="Current Password"
               type="password"
@@ -282,13 +292,14 @@ export default function SettingsPage() {
             />
           </div>
 
-          <div className="pt-4 border-t border-slate-100 flex justify-end">
+          <div className="pt-6 border-t border-slate-100 flex justify-end">
             <Button
               type="submit"
               variant="secondary"
-              size="md"
+              size="lg"
               isLoading={passwordLoading}
               icon={ShieldCheck}
+              className="rounded-full shadow-sm hover:shadow-md transition-all"
             >
               Update Password
             </Button>

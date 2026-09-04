@@ -14,16 +14,16 @@ import SettingsPage from './pages/SettingsPage';
 
 // Placeholder views for upcoming modules with 2026 SaaS styling
 const PlaceholderView = ({ title, subtitle, nextModule }) => (
-  <div className="p-8 sm:p-12 rounded-3xl bg-white border border-slate-200/80 shadow-card text-center space-y-4 max-w-2xl mx-auto my-8">
-    <div className="w-12 h-12 rounded-2xl bg-blue-50 text-brand-accent flex items-center justify-center mx-auto border border-blue-100 shadow-sm">
-      <span className="text-xl font-bold">✨</span>
+  <div className="p-8 sm:p-12 rounded-3xl bg-white border border-slate-100/80 shadow-card text-center space-y-4 max-w-2xl mx-auto my-10">
+    <div className="w-14 h-14 rounded-2xl bg-blue-50 text-brand-accent flex items-center justify-center mx-auto border border-blue-100/60 shadow-sm">
+      <span className="text-2xl">✨</span>
     </div>
-    <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">{title}</h2>
+    <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">{title}</h2>
     <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto font-medium leading-relaxed">
       {subtitle}
     </p>
     <div className="pt-2">
-      <span className="inline-block px-3.5 py-1 text-xs font-bold rounded-full bg-blue-50 text-brand-accent border border-blue-200/80 shadow-sm">
+      <span className="inline-block px-4 py-1.5 text-xs font-bold rounded-full bg-blue-50 text-brand-accent border border-blue-200/80 shadow-sm">
         ● Scheduled for {nextModule}
       </span>
     </div>

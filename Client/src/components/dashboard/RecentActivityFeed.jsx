@@ -10,7 +10,7 @@ import Card from '../common/Card';
 import Button from '../common/Button';
 
 /**
- * Modern 2026 SaaS Recent Transactions Stream Widget Component
+ * Premium SaaS Recent Transactions Stream Widget Component
  * Displays real-time credit and payment transaction slips with customer navigation.
  */
 export default function RecentActivityFeed({ transactions = [] }) {
@@ -24,15 +24,15 @@ export default function RecentActivityFeed({ transactions = [] }) {
     }).format(amount);
 
   return (
-    <Card className="p-6 sm:p-7 space-y-5 flex flex-col justify-between h-full">
-      <div className="space-y-4">
+    <Card padding="lg" className="space-y-6 flex flex-col justify-between h-full">
+      <div className="space-y-5">
         {/* Header */}
-        <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-700">
+        <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-700 shadow-soft">
               <Receipt className="w-4 h-4" />
             </div>
-            <h3 className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight">
+            <h3 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">
               Recent Store Activity Stream
             </h3>
           </div>
@@ -44,12 +44,12 @@ export default function RecentActivityFeed({ transactions = [] }) {
 
         {/* Transaction Stream List */}
         {transactions.length === 0 ? (
-          <div className="py-12 text-center space-y-2 text-xs text-slate-400">
-            <div className="w-12 h-12 rounded-2xl bg-slate-50 text-slate-400 flex items-center justify-center mx-auto border border-slate-200/80 shadow-sm">
-              <Receipt className="w-6 h-6" />
+          <div className="py-12 text-center space-y-3 text-xs text-slate-400">
+            <div className="w-14 h-14 rounded-2xl bg-slate-50 text-slate-400 flex items-center justify-center mx-auto shadow-soft">
+              <Receipt className="w-7 h-7" />
             </div>
             <p className="font-extrabold text-slate-900 text-sm">No Recent Transactions</p>
-            <p className="text-slate-500">New customer credit and payment entries will appear here live.</p>
+            <p className="text-slate-500 font-medium">New customer credit and payment entries will appear here live.</p>
           </div>
         ) : (
           <div className="divide-y divide-slate-100">
@@ -68,31 +68,31 @@ export default function RecentActivityFeed({ transactions = [] }) {
                 <div
                   key={tx._id}
                   onClick={() => customer._id && navigate(`/customers/${customer._id}`)}
-                  className="py-3.5 flex items-center justify-between gap-4 hover:bg-slate-50 px-3 rounded-2xl transition-colors cursor-pointer group"
+                  className="py-4 flex items-center justify-between gap-4 hover:bg-slate-50 px-3.5 rounded-2xl transition-colors cursor-pointer group"
                 >
                   <div className="flex items-center gap-3.5 min-w-0">
                     <div
-                      className={`w-9 h-9 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-sm ${
+                      className={`w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-soft ${
                         isCredit
-                          ? 'bg-rose-50 text-rose-600 border border-rose-100'
-                          : 'bg-emerald-50 text-emerald-600 border border-emerald-100'
+                          ? 'bg-rose-50 text-rose-600'
+                          : 'bg-emerald-50 text-emerald-600'
                       }`}
                     >
                       {isCredit ? (
-                        <ArrowUpRight className="w-4 h-4" />
+                        <ArrowUpRight className="w-5 h-5" />
                       ) : (
-                        <ArrowDownLeft className="w-4 h-4" />
+                        <ArrowDownLeft className="w-5 h-5" />
                       )}
                     </div>
 
                     <div className="min-w-0">
-                      <h4 className="text-xs sm:text-sm font-extrabold text-slate-900 truncate group-hover:text-brand-accent transition-colors">
+                      <h4 className="text-xs sm:text-sm font-extrabold text-slate-900 truncate group-hover:text-blue-600 transition-colors tracking-tight">
                         {customer.name || 'Unknown Customer'}
                       </h4>
-                      <div className="flex items-center gap-2 text-[11px] font-medium text-slate-400 mt-0.5">
+                      <div className="flex items-center gap-2 text-xs font-medium text-slate-400 mt-0.5">
                         <span>{formattedDate}</span>
                         {tx.paymentMode && (
-                          <span className="px-1.5 py-0.5 rounded-md bg-slate-100 border border-slate-200 text-[10px] font-bold text-slate-700">
+                          <span className="px-2 py-0.5 rounded-full bg-slate-100 text-[10px] font-extrabold text-slate-700">
                             {tx.paymentMode}
                           </span>
                         )}
@@ -110,7 +110,7 @@ export default function RecentActivityFeed({ transactions = [] }) {
                         ? `+ ${formatCurrency(tx.amount)}`
                         : `- ${formatCurrency(tx.amount)}`}
                     </div>
-                    <div className="text-[10px] font-bold text-slate-400">
+                    <div className="text-[10px] font-bold text-slate-400 mt-0.5">
                       {isCredit ? 'Credit Given' : 'Payment Cleared'}
                     </div>
                   </div>
@@ -122,7 +122,7 @@ export default function RecentActivityFeed({ transactions = [] }) {
       </div>
 
       {/* Footer Link */}
-      <div className="pt-3 border-t border-slate-100">
+      <div className="pt-4 border-t border-slate-100">
         <Button
           variant="ghost"
           size="sm"

@@ -19,8 +19,8 @@ import Pagination from '../components/common/Pagination';
 import Skeleton from '../components/common/Skeleton';
 
 /**
- * Modern 2026 SaaS Customer Ledger & Statement Detail Page (Stripe / Mercury style)
- * Large floating balance cards, interactive financial filters, responsive tables, and instant modal forms.
+ * Premium SaaS Customer Ledger & Statement Detail Page (Stripe / Mercury style)
+ * Large floating balance panels (28px radius), interactive financial filters, clean tables, and instant modal forms.
  */
 export default function CustomerDetailPage() {
   const { id } = useParams();
@@ -144,24 +144,24 @@ export default function CustomerDetailPage() {
 
   if (loading && !customer) {
     return (
-      <div className="space-y-6 max-w-6xl mx-auto">
-        <Skeleton variant="card" height={160} />
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="space-y-8 max-w-6xl mx-auto">
+        <Skeleton variant="card" height={180} />
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <Skeleton variant="kpiCard" count={3} />
         </div>
-        <Skeleton variant="card" height={320} />
+        <Skeleton variant="card" height={340} />
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 sm:space-y-8 max-w-6xl mx-auto pb-12">
+    <div className="space-y-8 sm:space-y-10 max-w-6xl mx-auto pb-16">
       {/* Back Navigation Bar */}
       <div>
         <button
           type="button"
           onClick={() => navigate('/customers')}
-          className="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-slate-900 transition-colors p-1"
+          className="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-slate-900 transition-colors p-1 cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Customer Khata Directory</span>
@@ -208,7 +208,7 @@ export default function CustomerDetailPage() {
 
       {/* Transaction Statement View */}
       {loading ? (
-        <div className="space-y-3">
+        <div className="space-y-4">
           <Skeleton variant="tableRow" count={5} />
         </div>
       ) : transactions.length === 0 ? (
@@ -217,7 +217,7 @@ export default function CustomerDetailPage() {
           onOpenPayment={() => setIsPaymentOpen(true)}
         />
       ) : (
-        <div className="space-y-6">
+        <div className="space-y-8">
           {/* Desktop Table View */}
           <div className="hidden md:block">
             <LedgerTable
@@ -227,7 +227,7 @@ export default function CustomerDetailPage() {
           </div>
 
           {/* Mobile Card List View */}
-          <div className="md:hidden space-y-3.5">
+          <div className="md:hidden space-y-4">
             <AnimatePresence mode="popLayout">
               {transactions.map((tx) => (
                 <TransactionCard

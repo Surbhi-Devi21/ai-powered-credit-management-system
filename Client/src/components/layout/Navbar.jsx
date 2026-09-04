@@ -1,10 +1,16 @@
 import React from 'react';
-import { Search, ArrowDownLeft, ArrowUpRight, Store } from 'lucide-react';
+import { Search, ArrowDownLeft, ArrowUpRight, Calendar, CreditCard, Bell } from 'lucide-react';
 import Button from '../common/Button';
 
 /**
- * Modern 2026 SaaS Glassmorphic Top Navbar Component
- * Features sticky backdrop-blur, breadcrumb titles, search trigger with ⌘K, and quick transaction shortcuts.
+ * Version 3: Premium Floating Top Navbar Component (Stripe / Linear style)
+ * Features:
+ * - Floating white rounded-full header with subtle shadow
+ * - Floating rounded-full search bar with ⌘K shortcut
+ * - Notification bell button with active dot
+ * - Profile avatar container
+ * - Live formatted date chip
+ * - Two beautiful gradient CTA buttons (+ Give Credit, + Take Payment)
  */
 export default function Navbar({
   title = 'Dashboard',
@@ -12,21 +18,23 @@ export default function Navbar({
   onOpenCreditModal,
   onOpenPaymentModal,
   onOpenSearch,
+  user = { name: 'Store Owner' },
 }) {
-  // Format today's date in Indian business format (e.g. 24 Aug, 2026)
+  // Format today's date in business format (e.g. Thu, 4 Sep 2026)
   const todayFormatted = new Intl.DateTimeFormat('en-IN', {
+    weekday: 'short',
     day: 'numeric',
     month: 'short',
     year: 'numeric',
   }).format(new Date());
 
   return (
-    <header className="sticky top-0 z-20 h-16 bg-white/80 backdrop-blur-xl border-b border-slate-200/80 px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 transition-all">
-      {/* Left: Title & Subtitle / Mobile Branding */}
-      <div className="flex items-center gap-3 min-w-0">
-        {/* Mobile-only logo */}
-        <div className="lg:hidden w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center text-white shadow-sm flex-shrink-0">
-          <Store className="w-4 h-4" />
+    <header className="sticky top-6 z-20 w-full bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-full border border-slate-900/[0.06] shadow-card px-5 sm:px-8 py-3 sm:py-3.5 flex items-center justify-between gap-4 sm:gap-6 transition-all select-none">
+      {/* Left: Page Title & Subtitle / Mobile Icon */}
+      <div className="flex items-center gap-3.5 min-w-0">
+        {/* Mobile-only icon */}
+        <div className="lg:hidden w-10 h-10 rounded-2xl bg-slate-900 flex items-center justify-center text-white shadow-soft flex-shrink-0">
+          <CreditCard className="w-5 h-5 text-blue-400" />
         </div>
 
         <div className="min-w-0">
@@ -34,43 +42,56 @@ export default function Navbar({
             {title}
           </h1>
           {subtitle && (
-            <p className="hidden sm:block text-[11px] text-slate-500 font-medium truncate">{subtitle}</p>
+            <p className="hidden md:block text-[11px] text-slate-500 font-medium truncate">
+              {subtitle}
+            </p>
           )}
         </div>
       </div>
 
-      {/* Center: Quick Search Trigger Button */}
+      {/* Center: Large Floating Search Bar */}
       {onOpenSearch && (
         <button
           type="button"
           onClick={onOpenSearch}
-          className="hidden md:flex items-center gap-2.5 px-3.5 py-1.5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs text-slate-400 hover:text-slate-700 transition-colors shadow-sm w-72 justify-between cursor-pointer"
+          className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-full bg-slate-50/80 hover:bg-slate-100/90 border border-slate-900/[0.05] text-xs text-slate-400 hover:text-slate-700 transition-all shadow-subtle w-72 lg:w-80 justify-between cursor-pointer group"
         >
-          <div className="flex items-center gap-2">
-            <Search className="w-3.5 h-3.5 text-slate-400" />
-            <span>Search customer or phone...</span>
+          <div className="flex items-center gap-2.5">
+            <Search className="w-4 h-4 text-slate-400 group-hover:text-slate-600 transition-colors" />
+            <span className="font-medium">Search customer or phone...</span>
           </div>
-          <kbd className="text-[10px] font-mono px-1.5 py-0.5 rounded-md bg-white border border-slate-200 text-slate-500 shadow-sm">
+          <kbd className="text-[10px] font-bold font-mono px-2 py-0.5 rounded-full bg-white border border-slate-200/80 text-slate-500 shadow-subtle">
             ⌘K
           </kbd>
         </button>
       )}
 
-      {/* Right: Quick Actions & Live Date */}
-      <div className="flex items-center gap-2.5 flex-shrink-0">
+      {/* Right: Date Chip + Notifications + Quick Actions + Profile Avatar */}
+      <div className="flex items-center gap-2.5 sm:gap-3.5 flex-shrink-0">
         {/* Live Date Chip */}
-        <span className="hidden xl:inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200/80 shadow-sm">
+        <div className="hidden xl:inline-flex items-center gap-2 text-xs font-bold text-slate-600 px-3.5 py-2 rounded-full bg-slate-50 border border-slate-900/[0.04] shadow-subtle">
+          <Calendar className="w-3.5 h-3.5 text-slate-400" />
           <span>{todayFormatted}</span>
-        </span>
+        </div>
+
+        {/* Notification Bell Button */}
+        <button
+          type="button"
+          title="Notifications"
+          className="relative p-2.5 rounded-full text-slate-500 hover:text-slate-900 bg-slate-50 hover:bg-slate-100/80 border border-slate-900/[0.04] shadow-subtle transition-all cursor-pointer"
+        >
+          <Bell className="w-4 h-4" />
+          <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-blue-600 ring-2 ring-white" />
+        </button>
 
         {/* Quick Udhar (Give Credit) Button */}
         {onOpenCreditModal && (
           <Button
-            variant="danger"
-            size="sm"
+            variant="creditGradient"
+            size="md"
             onClick={onOpenCreditModal}
             icon={ArrowUpRight}
-            className="hidden sm:inline-flex"
+            className="hidden sm:inline-flex rounded-full shadow-button"
           >
             + Give Credit
           </Button>
@@ -79,14 +100,23 @@ export default function Navbar({
         {/* Quick Jama (Take Payment) Button */}
         {onOpenPaymentModal && (
           <Button
-            variant="success"
-            size="sm"
+            variant="paymentGradient"
+            size="md"
             onClick={onOpenPaymentModal}
             icon={ArrowDownLeft}
+            className="rounded-full shadow-button"
           >
             + Take Payment
           </Button>
         )}
+
+        {/* Profile Avatar */}
+        <div className="relative pl-1">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white flex items-center justify-center font-extrabold text-sm shadow-subtle border border-slate-700/50 cursor-pointer">
+            {user?.name ? user.name.charAt(0).toUpperCase() : 'O'}
+          </div>
+          <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-white" />
+        </div>
       </div>
     </header>
   );

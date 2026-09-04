@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Button from './Button';
 
 /**
- * Modern 2026 SaaS Minimalist Pagination Component
+ * Premium SaaS Minimalist Pagination Component
  * Displays clean slice range, total records count, and accessible navigation buttons.
  */
 export default function Pagination({
@@ -25,9 +25,9 @@ export default function Pagination({
     >
       {/* Items range counter */}
       <div className="text-xs text-slate-500 font-medium">
-        Showing <span className="font-bold text-slate-900 tabular-nums">{startItem}</span> to{' '}
-        <span className="font-bold text-slate-900 tabular-nums">{endItem}</span> of{' '}
-        <span className="font-bold text-slate-900 tabular-nums">{totalItems}</span> records
+        Showing <span className="font-extrabold text-slate-900 tabular-nums">{startItem}</span> to{' '}
+        <span className="font-extrabold text-slate-900 tabular-nums">{endItem}</span> of{' '}
+        <span className="font-extrabold text-slate-900 tabular-nums">{totalItems}</span> records
       </div>
 
       {/* Navigation Controls */}
@@ -42,7 +42,7 @@ export default function Pagination({
           Previous
         </Button>
 
-        <div className="hidden sm:flex items-center gap-1 px-3 py-1 text-xs font-bold text-slate-700 bg-white border border-slate-200/80 rounded-lg shadow-sm">
+        <div className="hidden sm:flex items-center gap-1 px-3.5 py-1.5 text-xs font-extrabold text-slate-700 bg-white border border-slate-100 rounded-full shadow-soft">
           Page {currentPage} of {totalPages}
         </div>
 

@@ -6,8 +6,8 @@ import BottomNav from './BottomNav';
 import FloatingActionButton from './FloatingActionButton';
 
 /**
- * Modern 2026 SaaS Protected Application Layout Shell
- * Integrates Desktop Sidebar, Top Navbar, Mobile Bottom Dock, and Mobile Floating Action Button around page views.
+ * Version 3: Premium SaaS Protected Application Layout Shell
+ * Integrates floating desktop sidebar, floating top navbar, and spacious 12-column canvas.
  */
 export default function ProtectedLayout({
   user = { businessName: 'Gupta Kirana Store', businessCategory: 'kirana', name: 'Rajesh Gupta' },
@@ -19,8 +19,8 @@ export default function ProtectedLayout({
   pageSubtitle,
 }) {
   return (
-    <div className="min-h-screen bg-surface-canvas flex">
-      {/* Desktop Persistent Sidebar */}
+    <div className="min-h-screen bg-canvas p-4 sm:p-6 lg:p-8 flex gap-6 sm:gap-8 selection:bg-blue-500 selection:text-white">
+      {/* Desktop Floating Sidebar */}
       <Sidebar
         shopName={user?.businessName || 'My Retail Store'}
         businessCategory={user?.businessCategory || 'Retail'}
@@ -28,19 +28,20 @@ export default function ProtectedLayout({
         onLogout={onLogout}
       />
 
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 pb-20 lg:pb-8">
-        {/* Top Navbar */}
+      {/* Main Floating Content Canvas */}
+      <div className="flex-1 flex flex-col min-w-0 space-y-6 sm:space-y-8 pb-24 lg:pb-10">
+        {/* Floating Navbar */}
         <Navbar
           title={pageTitle}
           subtitle={pageSubtitle}
           onOpenCreditModal={onOpenCreditModal}
           onOpenPaymentModal={onOpenPaymentModal}
           onOpenSearch={onOpenSearch}
+          user={user}
         />
 
-        {/* Dynamic Page Router Outlet */}
-        <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+        {/* Dynamic Page Router Outlet with 12-Column Responsive Flow */}
+        <main className="flex-1 w-full max-w-7xl mx-auto">
           <Outlet />
         </main>
       </div>

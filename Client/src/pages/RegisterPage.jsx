@@ -86,33 +86,35 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center px-4 py-12 bg-slate-50 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col justify-center items-center px-4 py-12 bg-[#F7F9FC] relative overflow-hidden">
       {/* Background Decorative Mesh Gradients */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-gradient-to-b from-blue-100/60 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-gradient-to-b from-blue-100/40 to-transparent rounded-full blur-3xl pointer-events-none" />
 
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="w-full max-w-lg relative z-10 space-y-6"
+        className="w-full max-w-lg relative z-10 space-y-8"
       >
         {/* Brand Header */}
-        <div className="text-center space-y-2">
-          <div className="w-14 h-14 rounded-3xl bg-slate-900 text-white flex items-center justify-center mx-auto shadow-md border border-slate-700/60">
-            <Store className="w-7 h-7" />
+        <div className="text-center space-y-3">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white flex items-center justify-center mx-auto shadow-sm border border-slate-700/50">
+            <Store className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-            Create Store Khata Account
-          </h1>
-          <p className="text-xs sm:text-sm text-slate-500 font-medium">
-            Start managing customer credit, recording payments, and sending reminders.
-          </p>
+          <div className="space-y-1">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              Create Store Khata Account
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-500 font-medium">
+              Start managing customer credit, recording payments, and sending reminders.
+            </p>
+          </div>
         </div>
 
-        {/* Floating Card */}
-        <div className="bg-white rounded-3xl border border-slate-200/80 shadow-card p-7 sm:p-9 space-y-6">
-          <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {/* Floating White Card */}
+        <div className="bg-white rounded-3xl border border-slate-100/80 shadow-card p-8 sm:p-10 space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
               <Input
                 label="Owner Name"
                 type="text"
@@ -139,7 +141,7 @@ export default function RegisterPage() {
               />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
               <Input
                 label="Email Address"
                 type="email"
@@ -165,19 +167,19 @@ export default function RegisterPage() {
               />
             </div>
 
-            <div className="space-y-1.5">
-              <label className="block text-xs font-semibold text-slate-700 tracking-tight">
+            <div className="space-y-2">
+              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
                 Business Category
               </label>
-              <div className="relative rounded-xl shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <div className="relative rounded-2xl shadow-sm">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
                   <Building className="w-4 h-4" />
                 </div>
                 <select
                   name="businessCategory"
                   value={formData.businessCategory}
                   onChange={handleChange}
-                  className="block w-full bg-white text-slate-900 text-sm border border-slate-200/90 rounded-xl pl-10 pr-8 h-10 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 cursor-pointer shadow-sm font-medium"
+                  className="block w-full bg-white text-slate-900 text-sm border border-slate-200/90 rounded-2xl pl-11 pr-8 h-11 sm:h-12 focus:outline-none focus:border-brand-accent focus:ring-4 focus:ring-brand-accent/10 cursor-pointer shadow-sm font-medium transition-all"
                 >
                   <option value="kirana">Kirana / Grocery Store</option>
                   <option value="medical">Medical / Pharmacy</option>
@@ -207,7 +209,7 @@ export default function RegisterPage() {
               variant="primary"
               size="lg"
               isLoading={loading}
-              className="w-full mt-2"
+              className="w-full mt-2 rounded-full shadow-sm hover:shadow-md transition-all"
               icon={ArrowRight}
               iconPosition="right"
             >
@@ -223,11 +225,11 @@ export default function RegisterPage() {
         </div>
 
         {/* Bottom Signin Link */}
-        <p className="text-center text-xs text-slate-500 font-medium">
+        <p className="text-center text-xs sm:text-sm text-slate-500 font-medium">
           Already have a store account?{' '}
           <Link
             to="/login"
-            className="font-extrabold text-brand-accent hover:text-brand-accentHover underline transition-colors"
+            className="font-bold text-brand-accent hover:text-brand-accentHover underline transition-colors"
           >
             Sign In Instead
           </Link>

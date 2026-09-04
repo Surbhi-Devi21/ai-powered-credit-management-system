@@ -6,16 +6,14 @@ import {
   MapPin,
   MessageCircle,
   ChevronRight,
-  Receipt,
-  ArrowUpRight,
 } from 'lucide-react';
 import Card from '../common/Card';
 import Badge from '../common/Badge';
 import Button from '../common/Button';
 
 /**
- * Modern 2026 SaaS Customer Directory Card Component (Mercury / Ramp style)
- * Large white card (rounded-3xl), avatar initial container, prominent debt figures, and quick WhatsApp trigger.
+ * Premium SaaS Customer Directory Card Component (Mercury / Ramp style)
+ * Large white card (rounded-3xl / 28px radius), avatar initial container, prominent debt figures, and quick WhatsApp trigger.
  */
 export default function CustomerCard({
   customer,
@@ -56,26 +54,27 @@ export default function CustomerCard({
       <Card
         hoverable
         onClick={() => navigate(`/customers/${customer._id}`)}
-        className="flex flex-col justify-between h-full space-y-5 p-6 sm:p-7 relative group"
+        padding="md"
+        className="flex flex-col justify-between h-full space-y-6 relative group"
       >
-        <div className="space-y-4">
+        <div className="space-y-5">
           {/* Top Row: Avatar + Name + Status Badge */}
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-3.5 min-w-0">
               <div
-                className={`w-12 h-12 rounded-2xl flex items-center justify-center font-extrabold text-base flex-shrink-0 shadow-sm ${
+                className={`w-12 h-12 rounded-2xl flex items-center justify-center font-extrabold text-base flex-shrink-0 shadow-soft ${
                   isArchived
                     ? 'bg-slate-100 text-slate-500'
                     : isDebtor
-                    ? 'bg-rose-50 text-rose-600 border border-rose-100'
-                    : 'bg-emerald-50 text-emerald-600 border border-emerald-100'
+                    ? 'bg-rose-50 text-rose-600'
+                    : 'bg-emerald-50 text-emerald-600'
                 }`}
               >
                 {customer.name.charAt(0).toUpperCase()}
               </div>
 
               <div className="min-w-0">
-                <h3 className="text-sm sm:text-base font-extrabold text-slate-900 truncate group-hover:text-brand-accent transition-colors tracking-tight">
+                <h3 className="text-base font-extrabold text-slate-900 truncate group-hover:text-blue-600 transition-colors tracking-tight">
                   {customer.name}
                 </h3>
                 <div className="flex items-center gap-1.5 text-xs text-slate-400 font-medium mt-0.5">
@@ -97,19 +96,19 @@ export default function CustomerCard({
 
           {/* Address Hint */}
           {customer.address && (
-            <div className="flex items-center gap-1.5 text-xs text-slate-500 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+            <div className="flex items-center gap-2 text-xs text-slate-500 bg-slate-50 p-3 rounded-2xl border border-slate-100/60 font-medium">
               <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
               <span className="truncate">{customer.address}</span>
             </div>
           )}
 
           {/* Balance Hero Box */}
-          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
+          <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100/60 space-y-1">
             <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">
               {isDebtor ? 'Total Outstanding Debt' : isSettled ? 'Account Cleared' : 'Advance Credit'}
             </span>
             <div
-              className={`text-xl sm:text-2xl font-extrabold tabular-nums tracking-tight ${
+              className={`text-2xl sm:text-[26px] font-extrabold tabular-nums tracking-tight ${
                 isArchived
                   ? 'text-slate-500'
                   : isDebtor
@@ -125,7 +124,7 @@ export default function CustomerCard({
         </div>
 
         {/* Bottom Actions */}
-        <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+        <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
           {isDebtor && (
             <Button
               variant="whatsapp"
@@ -138,7 +137,7 @@ export default function CustomerCard({
             </Button>
           )}
 
-          <div className="ml-auto flex items-center gap-1 text-xs font-bold text-slate-700 group-hover:text-brand-accent transition-colors">
+          <div className="ml-auto flex items-center gap-1 text-xs font-bold text-slate-700 group-hover:text-blue-600 transition-colors">
             <span>View Statement</span>
             <ChevronRight className="w-4 h-4" />
           </div>

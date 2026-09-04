@@ -5,8 +5,8 @@ import Card from '../common/Card';
 import Button from '../common/Button';
 
 /**
- * Modern 2026 SaaS AI Business Assistant Spotlight Banner Component (Linear / Vercel AI style)
- * High-end dark gradient surface with glowing badges and direct navigation to AI Insights.
+ * Premium SaaS AI Business Assistant Spotlight Banner Component
+ * Floating card with 28px rounded corners, subtle dark Linear aesthetic, and direct navigation.
  */
 export default function AiQuickInsightsBanner({
   todayCollection = 0,
@@ -23,19 +23,19 @@ export default function AiQuickInsightsBanner({
     }).format(val);
 
   return (
-    <Card className="p-6 sm:p-8 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white border-slate-700/60 shadow-modal space-y-5 rounded-3xl relative overflow-hidden">
-      {/* Background Decorative Glow */}
-      <div className="absolute -top-24 -right-24 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 relative z-10">
+    <Card
+      padding="lg"
+      className="bg-slate-900 text-white border-0 shadow-modal space-y-6 relative overflow-hidden"
+    >
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
         {/* Left: AI Intro & Stats */}
-        <div className="space-y-2 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-amber-400 text-xs font-extrabold border border-white/10 shadow-sm backdrop-blur-md">
+        <div className="space-y-3 max-w-2xl">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-amber-400 text-xs font-bold shadow-soft backdrop-blur-sm">
             <Sparkles className="w-3.5 h-3.5" />
             <span>AI Business Assistant &bull; Grounded in Live Khata</span>
           </div>
 
-          <h3 className="text-lg sm:text-xl font-extrabold tracking-tight text-white">
+          <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">
             Need actionable intelligence on your store's credit risk?
           </h3>
 
@@ -55,7 +55,7 @@ export default function AiQuickInsightsBanner({
             onClick={() => navigate('/ai-insights')}
             icon={ArrowRight}
             iconPosition="right"
-            className="bg-white text-slate-900 hover:bg-slate-100 font-extrabold border-0 shadow-modal"
+            className="bg-white text-slate-900 hover:bg-slate-100 font-extrabold border-0 shadow-button"
           >
             Launch AI Assistant
           </Button>
@@ -63,10 +63,10 @@ export default function AiQuickInsightsBanner({
       </div>
 
       {/* Feature Trust Badges */}
-      <div className="flex flex-wrap items-center gap-6 pt-4 border-t border-white/10 text-xs text-slate-300 font-medium relative z-10">
+      <div className="flex flex-wrap items-center gap-8 pt-5 border-t border-white/10 text-xs text-slate-300 font-medium relative z-10">
         <div className="flex items-center gap-2">
           <ShieldCheck className="w-4 h-4 text-emerald-400" />
-          <span>Zero Hallucination (Strictly Grounded in DB)</span>
+          <span>Strictly Grounded in Live Database</span>
         </div>
         <div className="flex items-center gap-2">
           <Zap className="w-4 h-4 text-amber-400" />
