@@ -144,27 +144,25 @@ export default function CustomerDetailPage() {
 
   if (loading && !customer) {
     return (
-      <div className="space-y-8 max-w-6xl mx-auto">
-        <Skeleton variant="card" height={180} />
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <Skeleton variant="kpiCard" count={3} />
-        </div>
+      <div className="space-y-6 max-w-6xl mx-auto">
+        <Skeleton variant="card" height={160} />
+        <Skeleton variant="card" height={80} />
         <Skeleton variant="card" height={340} />
       </div>
     );
   }
 
   return (
-    <div className="space-y-8 sm:space-y-10 max-w-6xl mx-auto pb-16">
+    <div className="space-y-6 sm:space-y-7 max-w-6xl mx-auto pb-16">
       {/* Back Navigation Bar */}
-      <div>
+      <div className="flex items-center justify-between">
         <button
           type="button"
           onClick={() => navigate('/customers')}
-          className="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-slate-900 transition-colors p-1 cursor-pointer"
+          className="group inline-flex items-center gap-2 text-xs font-medium text-slate-500 hover:text-slate-900 transition-colors py-1 cursor-pointer select-none"
         >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Back to Customer Khata Directory</span>
+          <ArrowLeft className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-900 group-hover:-translate-x-0.5 transition-all" />
+          <span>Back to Customer Directory</span>
         </button>
       </div>
 
@@ -217,7 +215,7 @@ export default function CustomerDetailPage() {
           onOpenPayment={() => setIsPaymentOpen(true)}
         />
       ) : (
-        <div className="space-y-8">
+        <div className="space-y-6">
           {/* Desktop Table View */}
           <div className="hidden md:block">
             <LedgerTable

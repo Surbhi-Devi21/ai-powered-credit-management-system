@@ -3,45 +3,45 @@ import { Receipt, ArrowUpRight, ArrowDownLeft } from 'lucide-react';
 import Button from '../common/Button';
 
 /**
- * Premium SaaS Empty Ledger Statement Placeholder Component
- * Rendered when a customer has no transactions recorded yet.
+ * Premium SaaS Empty Ledger Statement Placeholder Component (Linear / Mercury style)
+ * Minimal empty state with neutral typography and calm CTA buttons.
  */
 export default function EmptyLedger({
   onOpenCredit,
   onOpenPayment,
 }) {
   return (
-    <div className="py-16 px-8 flex flex-col items-center justify-center text-center space-y-5 bg-white rounded-3xl shadow-card border border-slate-100">
-      <div className="w-16 h-16 rounded-2xl bg-slate-50 text-slate-400 flex items-center justify-center shadow-soft">
-        <Receipt className="w-8 h-8" />
+    <div className="bg-white rounded-3xl border border-slate-900/[0.06] shadow-subtle py-14 px-6 sm:px-10 flex flex-col items-center justify-center text-center space-y-4 select-none">
+      <div className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-900/[0.06] text-slate-400 flex items-center justify-center">
+        <Receipt className="w-5 h-5" />
       </div>
 
-      <div className="max-w-sm space-y-1.5">
-        <h4 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">
+      <div className="max-w-sm space-y-1">
+        <h4 className="text-base font-semibold text-slate-900 tracking-tight">
           No Ledger Transactions Yet
         </h4>
-        <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-medium">
-          This customer's statement is completely clear. Start by recording a credit purchase or a payment.
+        <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-normal">
+          This customer statement is clear with no recorded entries. Begin by recording a credit or payment transaction.
         </p>
       </div>
 
-      <div className="flex items-center gap-3.5 pt-3 flex-wrap justify-center">
+      <div className="flex items-center gap-3 pt-2 flex-wrap justify-center">
         <Button
-          variant="creditGradient"
+          variant="primary"
           size="md"
           onClick={onOpenCredit}
           icon={ArrowUpRight}
-          className="shadow-button"
+          className="shadow-subtle hover:shadow-card font-medium text-xs sm:text-sm"
         >
           + Give Credit (Udhar)
         </Button>
 
         <Button
-          variant="paymentGradient"
+          variant="secondary"
           size="md"
           onClick={onOpenPayment}
           icon={ArrowDownLeft}
-          className="shadow-button"
+          className="shadow-subtle hover:shadow-card font-medium text-xs sm:text-sm border-slate-900/[0.08]"
         >
           + Take Payment (Jama)
         </Button>

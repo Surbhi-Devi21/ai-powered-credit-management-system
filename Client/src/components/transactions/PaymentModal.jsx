@@ -91,7 +91,13 @@ export default function PaymentModal({
       maxWidth="md"
       footer={
         <>
-          <Button variant="secondary" size="md" onClick={onClose} disabled={isLoading}>
+          <Button
+            variant="secondary"
+            size="md"
+            onClick={onClose}
+            disabled={isLoading}
+            className="border-slate-900/[0.08] shadow-subtle font-medium text-xs sm:text-sm"
+          >
             Cancel
           </Button>
           <Button
@@ -100,27 +106,27 @@ export default function PaymentModal({
             onClick={handleSubmit}
             isLoading={isLoading}
             icon={ArrowDownLeft}
-            className="shadow-button"
+            className="shadow-subtle hover:shadow-card font-semibold text-xs sm:text-sm"
           >
             Confirm & Record Payment
           </Button>
         </>
       }
     >
-      <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-4.5" noValidate>
         {/* Quick Settle Full Amount Chip */}
         {currentOutstanding > 0 && (
-          <div className="flex items-center justify-between p-3.5 rounded-2xl bg-emerald-50 border border-emerald-100 text-xs shadow-soft">
-            <span className="text-emerald-900 font-medium">
+          <div className="flex items-center justify-between py-2.5 px-4 rounded-2xl bg-emerald-50/70 border border-emerald-200/60 text-xs">
+            <span className="text-emerald-900 font-normal">
               Pending Dues:{' '}
-              <strong className="font-extrabold text-emerald-700 tabular-nums">
+              <strong className="font-bold text-emerald-700 tabular-nums">
                 ₹{currentOutstanding.toLocaleString('en-IN')}
               </strong>
             </span>
             <button
               type="button"
               onClick={handleFullSettle}
-              className="font-extrabold text-emerald-700 hover:text-emerald-800 underline transition-colors cursor-pointer"
+              className="font-semibold text-emerald-700 hover:text-emerald-800 underline transition-colors cursor-pointer text-xs"
             >
               Fill Full Settlement
             </button>
@@ -140,6 +146,8 @@ export default function PaymentModal({
           required
           autoFocus
           inputMode="decimal"
+          className="text-base sm:text-lg font-bold tabular-nums"
+          helperText="Enter payment amount received in cash or online transfer."
         />
 
         {/* Payment Mode Selector */}
@@ -147,7 +155,7 @@ export default function PaymentModal({
           <label className="block text-xs font-bold text-slate-700 tracking-tight">
             Payment Mode <span className="text-rose-500">*</span>
           </label>
-          <div className="relative rounded-2xl shadow-soft">
+          <div className="relative rounded-2xl">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
               <CreditCard className="w-4 h-4" />
             </div>
@@ -155,7 +163,7 @@ export default function PaymentModal({
               name="paymentMode"
               value={formData.paymentMode}
               onChange={handleChange}
-              className="block w-full bg-white text-slate-900 text-sm border border-slate-200/80 rounded-2xl pl-11 pr-8 h-12 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 cursor-pointer shadow-soft font-medium"
+              className="block w-full bg-white text-slate-900 text-sm border border-slate-200/80 rounded-2xl pl-11 pr-8 h-11 sm:h-12 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 cursor-pointer hover:border-slate-300 transition-colors font-medium"
             >
               {paymentModes.map((mode) => (
                 <option key={mode.value} value={mode.value}>
@@ -175,6 +183,7 @@ export default function PaymentModal({
           onChange={handleChange}
           icon={Calendar}
           required
+          helperText="Date of receipt or bank settlement."
         />
 
         {/* Notes / Remarks */}
@@ -186,6 +195,7 @@ export default function PaymentModal({
           onChange={handleChange}
           placeholder="e.g. GPay UPI Ref #489201"
           icon={FileText}
+          helperText="Optional reference or transaction note."
         />
       </form>
     </Modal>

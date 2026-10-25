@@ -1,10 +1,8 @@
 import React from 'react';
-import { ArrowUpRight, ArrowDownLeft, Receipt } from 'lucide-react';
-import Card from '../common/Card';
 
 /**
- * Premium SaaS Ledger Financial Summary Cards Component (Mercury / Ramp style)
- * High-level overview of lifetime credit given, cleared payments, and transaction volume.
+ * Premium SaaS Ledger Financial Summary Strip Component (Linear / Mercury Banking style)
+ * Slim financial summary strip with hairline dividers and typography-first metrics.
  */
 export default function LedgerSummary({
   customer,
@@ -25,54 +23,41 @@ export default function LedgerSummary({
   }).format(customer.totalPaymentReceived || 0);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
-      {/* Total Credit Given */}
-      <Card padding="md" className="flex items-center justify-between">
-        <div className="space-y-1">
-          <div className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">
+    <div className="bg-white rounded-3xl border border-slate-900/[0.06] shadow-subtle p-5 sm:p-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-slate-900/[0.06]">
+        {/* Total Credit Given */}
+        <div className="pb-4 sm:pb-0 sm:px-6 first:pl-0 space-y-1">
+          <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
             Total Credit Given
           </div>
-          <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tabular-nums">
+          <div className="text-xl sm:text-2xl font-bold text-slate-900 tabular-nums tracking-tight">
             {formattedCreditGiven}
           </div>
-          <div className="text-xs text-slate-400 font-medium">Cumulative Udhar purchases</div>
+          <div className="text-xs text-slate-400 font-normal">Cumulative credit purchases</div>
         </div>
-        <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center shadow-soft flex-shrink-0">
-          <ArrowUpRight className="w-6 h-6" />
-        </div>
-      </Card>
 
-      {/* Total Payment Received */}
-      <Card padding="md" className="flex items-center justify-between">
-        <div className="space-y-1">
-          <div className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">
+        {/* Total Payment Received */}
+        <div className="py-4 sm:py-0 sm:px-6 space-y-1">
+          <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
             Total Payments Cleared
           </div>
-          <div className="text-2xl sm:text-3xl font-extrabold text-emerald-600 tabular-nums">
+          <div className="text-xl sm:text-2xl font-bold text-emerald-600 tabular-nums tracking-tight">
             {formattedPaymentReceived}
           </div>
-          <div className="text-xs text-slate-400 font-medium">Cumulative Jama settlements</div>
+          <div className="text-xs text-slate-400 font-normal">Cumulative settlements</div>
         </div>
-        <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shadow-soft flex-shrink-0">
-          <ArrowDownLeft className="w-6 h-6" />
-        </div>
-      </Card>
 
-      {/* Transaction Records Count */}
-      <Card padding="md" className="flex items-center justify-between">
-        <div className="space-y-1">
-          <div className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">
+        {/* Transaction Records Count */}
+        <div className="pt-4 sm:pt-0 sm:px-6 last:pr-0 space-y-1">
+          <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
             Ledger Entries
           </div>
-          <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tabular-nums">
+          <div className="text-xl sm:text-2xl font-bold text-slate-900 tabular-nums tracking-tight">
             {transactionCount} Entries
           </div>
-          <div className="text-xs text-slate-400 font-medium">Recorded transaction slips</div>
+          <div className="text-xs text-slate-400 font-normal">Recorded transaction slips</div>
         </div>
-        <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shadow-soft flex-shrink-0">
-          <Receipt className="w-6 h-6" />
-        </div>
-      </Card>
+      </div>
     </div>
   );
 }

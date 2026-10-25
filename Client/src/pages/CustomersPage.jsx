@@ -109,15 +109,9 @@ export default function CustomersPage() {
 
   return (
     <div className="space-y-8 sm:space-y-10 max-w-7xl mx-auto pb-16">
-      {/* Top Header & Overview Metric Panel */}
-      <Card padding="lg" className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div className="space-y-1.5">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-blue-500" />
-            <span className="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest">
-              Directory Ledger
-            </span>
-          </div>
+      {/* Top Header & Action Panel */}
+      <div className="p-7 sm:p-8 rounded-3xl bg-white border border-slate-900/[0.06] shadow-card flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="space-y-1">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
             Customer Khata Accounts
           </h2>
@@ -126,66 +120,60 @@ export default function CustomersPage() {
           </p>
         </div>
 
-        {/* Action Button */}
+        {/* Action Button: Dark Rounded-Full Primary Button */}
         <div className="flex items-center gap-3 self-start md:self-auto">
           <Button
-            variant="accent"
+            variant="primary"
             size="lg"
             onClick={() => setIsFormOpen(true)}
             icon={UserPlus}
-            className="shadow-button"
+            className="rounded-full shadow-button"
           >
             + Add New Customer
           </Button>
         </div>
-      </Card>
+      </div>
 
-      {/* Directory Quick Metric Cards */}
+      {/* Directory Quick Metric Cards (Typography-First, Mercury/Linear Style) */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
-        <Card padding="md" className="flex items-center justify-between">
-          <div className="space-y-1">
-            <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">
+        <div className="p-6 sm:p-7 rounded-3xl bg-white border border-slate-900/[0.06] shadow-card space-y-3">
+          <div className="flex items-center justify-between text-slate-400">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
               Total Market Dues
             </span>
-            <div className="text-2xl sm:text-3xl font-extrabold text-rose-600 tabular-nums">
-              {formatCurrency(stats.totalOutstanding)}
-            </div>
-            <p className="text-xs text-slate-400 font-medium">Pending collection</p>
+            <TrendingUp className="w-4 h-4 text-rose-500" />
           </div>
-          <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center shadow-soft">
-            <TrendingUp className="w-6 h-6" />
+          <div className="text-3xl sm:text-4xl font-extrabold text-rose-600 tabular-nums tracking-tight">
+            {formatCurrency(stats.totalOutstanding)}
           </div>
-        </Card>
+          <p className="text-xs text-slate-400 font-medium">Pending collection across active accounts</p>
+        </div>
 
-        <Card padding="md" className="flex items-center justify-between">
-          <div className="space-y-1">
-            <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">
+        <div className="p-6 sm:p-7 rounded-3xl bg-white border border-slate-900/[0.06] shadow-card space-y-3">
+          <div className="flex items-center justify-between text-slate-400">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
               Total Customers
             </span>
-            <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tabular-nums">
-              {stats.totalCustomers}
-            </div>
-            <p className="text-xs text-slate-400 font-medium">Registered in directory</p>
+            <Users className="w-4 h-4 text-slate-400" />
           </div>
-          <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shadow-soft">
-            <Users className="w-6 h-6" />
+          <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 tabular-nums tracking-tight">
+            {stats.totalCustomers}
           </div>
-        </Card>
+          <p className="text-xs text-slate-400 font-medium">Registered in store directory</p>
+        </div>
 
-        <Card padding="md" className="flex items-center justify-between">
-          <div className="space-y-1">
-            <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">
+        <div className="p-6 sm:p-7 rounded-3xl bg-white border border-slate-900/[0.06] shadow-card space-y-3">
+          <div className="flex items-center justify-between text-slate-400">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
               Active Debtors
             </span>
-            <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tabular-nums">
-              {stats.activeDebtors} Customers
-            </div>
-            <p className="text-xs text-slate-400 font-medium">Currently owe money</p>
+            <CheckCircle2 className="w-4 h-4 text-amber-500" />
           </div>
-          <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center shadow-soft">
-            <CheckCircle2 className="w-6 h-6" />
+          <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 tabular-nums tracking-tight">
+            {stats.activeDebtors}
           </div>
-        </Card>
+          <p className="text-xs text-slate-400 font-medium">Customers currently with pending credit</p>
+        </div>
       </div>
 
       {/* Search & Filter Toolbar */}

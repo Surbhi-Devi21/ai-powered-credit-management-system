@@ -22,7 +22,7 @@ export default function CustomerSearch({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="block w-full bg-white text-slate-900 text-xs sm:text-sm border border-slate-200/80 rounded-full pl-12 pr-11 h-12 shadow-soft placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all font-medium"
+        className="block w-full bg-white text-slate-900 text-xs sm:text-sm border border-slate-900/[0.06] rounded-full pl-12 pr-11 h-12 shadow-subtle hover:border-slate-900/[0.12] placeholder:text-slate-400 focus:outline-none focus:border-slate-900/20 focus:ring-4 focus:ring-slate-900/[0.03] transition-all font-medium"
       />
 
       {value && (

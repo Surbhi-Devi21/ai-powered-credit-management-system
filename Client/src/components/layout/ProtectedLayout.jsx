@@ -19,7 +19,7 @@ export default function ProtectedLayout({
   pageSubtitle,
 }) {
   return (
-    <div className="min-h-screen bg-canvas p-4 sm:p-6 lg:p-8 flex gap-6 sm:gap-8 selection:bg-blue-500 selection:text-white">
+    <div className="min-h-screen bg-canvas p-4 sm:p-6 lg:p-8 flex items-start gap-6 sm:gap-8 selection:bg-blue-500 selection:text-white">
       {/* Desktop Floating Sidebar */}
       <Sidebar
         shopName={user?.businessName || 'My Retail Store'}

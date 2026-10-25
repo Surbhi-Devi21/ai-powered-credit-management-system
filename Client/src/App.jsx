@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Sparkles, ArrowLeft } from 'lucide-react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import ProtectedRoute from './components/layout/ProtectedRoute';
 import ProtectedLayout from './components/layout/ProtectedLayout';
@@ -12,23 +13,43 @@ import CustomersPage from './pages/CustomersPage';
 import CustomerDetailPage from './pages/CustomerDetailPage';
 import SettingsPage from './pages/SettingsPage';
 
-// Placeholder views for upcoming modules with 2026 SaaS styling
-const PlaceholderView = ({ title, subtitle, nextModule }) => (
-  <div className="p-8 sm:p-12 rounded-3xl bg-white border border-slate-100/80 shadow-card text-center space-y-4 max-w-2xl mx-auto my-10">
-    <div className="w-14 h-14 rounded-2xl bg-blue-50 text-brand-accent flex items-center justify-center mx-auto border border-blue-100/60 shadow-sm">
-      <span className="text-2xl">✨</span>
+// Placeholder views for upcoming modules with Linear / Mercury empty state styling
+const PlaceholderView = ({ title, subtitle, nextModule }) => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="bg-white rounded-3xl border border-slate-900/[0.06] shadow-card text-center p-8 sm:p-12 space-y-4.5 max-w-xl mx-auto my-10 select-none">
+      <div className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-900/[0.06] flex items-center justify-center mx-auto text-slate-400">
+        <Sparkles className="w-5 h-5 text-slate-500" />
+      </div>
+
+      <div className="space-y-1.5">
+        <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">{title}</h2>
+        <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto font-normal leading-relaxed">
+          {subtitle}
+        </p>
+      </div>
+
+      <div className="pt-1">
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 text-[11px] font-medium rounded-full bg-slate-100 text-slate-600 border border-slate-900/[0.06]">
+          <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+          <span>Scheduled for {nextModule}</span>
+        </span>
+      </div>
+
+      <div className="pt-3">
+        <button
+          type="button"
+          onClick={() => navigate('/dashboard')}
+          className="inline-flex items-center gap-2 h-10 px-5 text-xs font-semibold rounded-full bg-slate-900 hover:bg-slate-800 text-white transition-all cursor-pointer shadow-subtle hover:shadow-card"
+        >
+          <ArrowLeft className="w-3.5 h-3.5" />
+          <span>Back to Dashboard</span>
+        </button>
+      </div>
     </div>
-    <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">{title}</h2>
-    <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto font-medium leading-relaxed">
-      {subtitle}
-    </p>
-    <div className="pt-2">
-      <span className="inline-block px-4 py-1.5 text-xs font-bold rounded-full bg-blue-50 text-brand-accent border border-blue-200/80 shadow-sm">
-        ● Scheduled for {nextModule}
-      </span>
-    </div>
-  </div>
-);
+  );
+};
 
 /**
  * Root Navigation Tree with Auth Provider and Protected Route Guards

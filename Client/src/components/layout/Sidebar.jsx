@@ -36,7 +36,7 @@ export default function Sidebar({
   ];
 
   return (
-    <aside className="hidden lg:flex flex-col w-72 h-[calc(100vh-3rem)] sticky top-6 my-auto bg-white rounded-[32px] border border-slate-900/[0.06] shadow-card flex-shrink-0 z-30 select-none overflow-hidden transition-all duration-300">
+    <aside className="hidden lg:flex flex-col w-72 h-[calc(100vh-3rem)] sticky top-6 bg-white rounded-[32px] border border-slate-900/[0.06] shadow-card flex-shrink-0 z-30 select-none overflow-hidden transition-all duration-300">
       {/* Top Logo & Shop Branding */}
       <div className="p-6 pb-5 border-b border-slate-100/60">
         <div className="flex items-center gap-3.5">

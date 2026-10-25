@@ -66,7 +66,13 @@ export default function CreditModal({
       maxWidth="md"
       footer={
         <>
-          <Button variant="secondary" size="md" onClick={onClose} disabled={isLoading}>
+          <Button
+            variant="secondary"
+            size="md"
+            onClick={onClose}
+            disabled={isLoading}
+            className="border-slate-900/[0.08] shadow-subtle font-medium text-xs sm:text-sm"
+          >
             Cancel
           </Button>
           <Button
@@ -75,15 +81,15 @@ export default function CreditModal({
             onClick={handleSubmit}
             isLoading={isLoading}
             icon={ArrowUpRight}
-            className="shadow-button"
+            className="shadow-subtle hover:shadow-card font-semibold text-xs sm:text-sm"
           >
             Confirm & Add Credit
           </Button>
         </>
       }
     >
-      <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-        {/* Credit Amount */}
+      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-4.5" noValidate>
+        {/* Credit Amount - Dominant Typography */}
         <Input
           label="Credit Amount (Udhar)"
           type="number"
@@ -96,6 +102,8 @@ export default function CreditModal({
           required
           autoFocus
           inputMode="decimal"
+          className="text-base sm:text-lg font-bold tabular-nums"
+          helperText="Enter the total credit sale amount in rupees."
         />
 
         {/* Items / Description */}
@@ -107,11 +115,11 @@ export default function CreditModal({
           onChange={handleChange}
           placeholder="e.g. 5kg Basmati Rice, Mustard Oil 2L"
           icon={Tag}
-          helperText="Optional details of goods purchased."
+          helperText="Optional reference details for customer statement."
         />
 
         {/* Date Inputs Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Input
             label="Posting Date"
             type="date"
@@ -120,6 +128,7 @@ export default function CreditModal({
             onChange={handleChange}
             icon={Calendar}
             required
+            helperText="Transaction entry date."
           />
 
           <Input
@@ -142,6 +151,7 @@ export default function CreditModal({
           onChange={handleChange}
           placeholder="e.g. BILL-1082"
           icon={FileText}
+          helperText="Optional invoice or slip reference number."
         />
       </form>
     </Modal>

@@ -51,25 +51,15 @@ export default function CustomerCard({
       exit={{ opacity: 0, scale: 0.98 }}
       transition={{ duration: 0.2 }}
     >
-      <Card
-        hoverable
+      <div
         onClick={() => navigate(`/customers/${customer._id}`)}
-        padding="md"
-        className="flex flex-col justify-between h-full space-y-6 relative group"
+        className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-900/[0.06] shadow-card hover:shadow-cardHover hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between h-full space-y-6 relative group cursor-pointer"
       >
-        <div className="space-y-5">
+        <div className="space-y-4">
           {/* Top Row: Avatar + Name + Status Badge */}
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-3.5 min-w-0">
-              <div
-                className={`w-12 h-12 rounded-2xl flex items-center justify-center font-extrabold text-base flex-shrink-0 shadow-soft ${
-                  isArchived
-                    ? 'bg-slate-100 text-slate-500'
-                    : isDebtor
-                    ? 'bg-rose-50 text-rose-600'
-                    : 'bg-emerald-50 text-emerald-600'
-                }`}
-              >
+              <div className="w-11 h-11 rounded-2xl bg-slate-100 text-slate-700 font-extrabold text-sm flex items-center justify-center flex-shrink-0 border border-slate-900/[0.04]">
                 {customer.name.charAt(0).toUpperCase()}
               </div>
 
@@ -94,23 +84,23 @@ export default function CustomerCard({
             )}
           </div>
 
-          {/* Address Hint */}
+          {/* Address Line (Clean, No Box) */}
           {customer.address && (
-            <div className="flex items-center gap-2 text-xs text-slate-500 bg-slate-50 p-3 rounded-2xl border border-slate-100/60 font-medium">
+            <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium truncate pt-0.5">
               <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
               <span className="truncate">{customer.address}</span>
             </div>
           )}
 
-          {/* Balance Hero Box */}
-          <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100/60 space-y-1">
-            <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">
-              {isDebtor ? 'Total Outstanding Debt' : isSettled ? 'Account Cleared' : 'Advance Credit'}
+          {/* Balance Display (Direct on Surface, No Nested Grey Box) */}
+          <div className="space-y-1 pt-1">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              {isDebtor ? 'Outstanding Due' : isSettled ? 'Account Settled' : 'Advance Credit'}
             </span>
             <div
-              className={`text-2xl sm:text-[26px] font-extrabold tabular-nums tracking-tight ${
+              className={`text-3xl font-extrabold tabular-nums tracking-tight ${
                 isArchived
-                  ? 'text-slate-500'
+                  ? 'text-slate-400'
                   : isDebtor
                   ? 'text-rose-600'
                   : isAdvance
@@ -124,25 +114,26 @@ export default function CustomerCard({
         </div>
 
         {/* Bottom Actions */}
-        <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
-          {isDebtor && (
-            <Button
-              variant="whatsapp"
-              size="sm"
+        <div className="pt-4 border-t border-slate-900/[0.06] flex items-center justify-between gap-3">
+          {isDebtor ? (
+            <button
+              type="button"
               onClick={handleWhatsApp}
-              icon={MessageCircle}
-              className="text-xs"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200/50 shadow-subtle transition-all cursor-pointer"
             >
-              WhatsApp
-            </Button>
+              <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
+              <span>WhatsApp</span>
+            </button>
+          ) : (
+            <div />
           )}
 
-          <div className="ml-auto flex items-center gap-1 text-xs font-bold text-slate-700 group-hover:text-blue-600 transition-colors">
+          <div className="ml-auto flex items-center gap-1 text-xs font-bold text-slate-500 group-hover:text-slate-900 transition-colors">
             <span>View Statement</span>
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
           </div>
         </div>
-      </Card>
+      </div>
     </motion.div>
   );
 }
