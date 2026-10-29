@@ -20,15 +20,28 @@ const app = express();
 app.use(helmet());
 
 // Enable Cross-Origin Resource Sharing (CORS)
-const allowedOrigins = [
-  process.env.CLIENT_URL,
-  'http://localhost:5173',
-  'http://localhost:5174',
-  'http://localhost:5175',
-  'http://127.0.0.1:5173',
-  'http://127.0.0.1:5174',
-  'http://127.0.0.1:5175',
-].filter(Boolean);
+const parseAllowedOrigins = () => {
+  const configuredOrigins = [process.env.CLIENT_URL, process.env.CLIENT_URLS]
+    .flatMap((value) => {
+      if (!value) return [];
+      return value
+        .split(',')
+        .map((item) => item.trim())
+        .filter(Boolean);
+    });
+
+  return [...new Set([
+    ...configuredOrigins,
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'http://localhost:5175',
+    'http://127.0.0.1:5173',
+    'http://127.0.0.1:5174',
+    'http://127.0.0.1:5175',
+  ])];
+};
+
+const allowedOrigins = parseAllowedOrigins();
 
 const corsOptions = {
   origin: (origin, callback) => {
