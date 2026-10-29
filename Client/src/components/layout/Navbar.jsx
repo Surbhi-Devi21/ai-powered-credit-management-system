@@ -29,93 +29,78 @@ export default function Navbar({
   }).format(new Date());
 
   return (
-    <header className="sticky top-6 z-20 w-full bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-full border border-slate-900/[0.06] shadow-card px-5 sm:px-8 py-3 sm:py-3.5 flex items-center justify-between gap-4 sm:gap-6 transition-all select-none">
-      {/* Left: Page Title & Subtitle / Mobile Icon */}
-      <div className="flex items-center gap-3.5 min-w-0">
-        {/* Mobile-only icon */}
-        <div className="lg:hidden w-10 h-10 rounded-2xl bg-slate-900 flex items-center justify-center text-white shadow-soft flex-shrink-0">
-          <CreditCard className="w-5 h-5 text-blue-400" />
+    <header className="sticky top-4 z-20 w-full rounded-[28px] border border-slate-200/80 bg-white/80 px-4 py-3 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.28)] backdrop-blur-xl sm:px-5 lg:px-6">
+      <div className="flex items-center justify-between gap-3 sm:gap-4">
+        <div className="flex min-w-0 items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-900 text-white shadow-[0_16px_30px_-18px_rgba(15,23,42,0.9)] lg:hidden">
+            <CreditCard className="h-4 w-4 text-blue-300" />
+          </div>
+
+          <div className="min-w-0">
+            <h1 className="truncate text-base font-black tracking-[-0.05em] text-slate-900 sm:text-lg">{title}</h1>
+            {subtitle && (
+              <p className="hidden text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400 md:block">{subtitle}</p>
+            )}
+          </div>
         </div>
 
-        <div className="min-w-0">
-          <h1 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight truncate">
-            {title}
-          </h1>
-          {subtitle && (
-            <p className="hidden md:block text-[11px] text-slate-500 font-medium truncate">
-              {subtitle}
-            </p>
+        {onOpenSearch && (
+          <button
+            type="button"
+            onClick={onOpenSearch}
+            className="hidden items-center justify-between rounded-full border border-slate-200 bg-slate-50/80 px-4 py-2.5 text-left text-xs font-medium text-slate-500 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] transition-all hover:border-slate-300 hover:bg-slate-100 md:flex md:w-[280px] lg:w-[360px]"
+          >
+            <div className="flex items-center gap-2.5">
+              <Search className="h-4 w-4 text-slate-400" />
+              <span>Search customer or phone...</span>
+            </div>
+            <kbd className="rounded-full border border-slate-200 bg-white px-1.5 py-0.5 text-[10px] font-bold font-mono text-slate-500">⌘K</kbd>
+          </button>
+        )}
+
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="hidden items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500 xl:flex">
+            <Calendar className="h-3.5 w-3.5 text-slate-400" />
+            {todayFormatted}
+          </div>
+
+          <button
+            type="button"
+            title="Notifications"
+            className="relative flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-slate-500 transition-all hover:border-slate-300 hover:bg-slate-100 hover:text-slate-900"
+          >
+            <Bell className="h-4 w-4" />
+            <span className="absolute right-2.5 top-2.5 h-2 w-2 rounded-full bg-blue-600 ring-2 ring-white" />
+          </button>
+
+          {onOpenCreditModal && (
+            <Button
+              variant="creditGradient"
+              size="md"
+              onClick={onOpenCreditModal}
+              icon={ArrowUpRight}
+              className="hidden sm:inline-flex rounded-full"
+            >
+              + Give Credit
+            </Button>
           )}
-        </div>
-      </div>
 
-      {/* Center: Large Floating Search Bar */}
-      {onOpenSearch && (
-        <button
-          type="button"
-          onClick={onOpenSearch}
-          className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-full bg-slate-50/80 hover:bg-slate-100/90 border border-slate-900/[0.05] text-xs text-slate-400 hover:text-slate-700 transition-all shadow-subtle w-72 lg:w-80 justify-between cursor-pointer group"
-        >
-          <div className="flex items-center gap-2.5">
-            <Search className="w-4 h-4 text-slate-400 group-hover:text-slate-600 transition-colors" />
-            <span className="font-medium">Search customer or phone...</span>
-          </div>
-          <kbd className="text-[10px] font-bold font-mono px-2 py-0.5 rounded-full bg-white border border-slate-200/80 text-slate-500 shadow-subtle">
-            ⌘K
-          </kbd>
-        </button>
-      )}
+          {onOpenPaymentModal && (
+            <Button
+              variant="paymentGradient"
+              size="md"
+              onClick={onOpenPaymentModal}
+              icon={ArrowDownLeft}
+              className="rounded-full"
+            >
+              + Take Payment
+            </Button>
+          )}
 
-      {/* Right: Date Chip + Notifications + Quick Actions + Profile Avatar */}
-      <div className="flex items-center gap-2.5 sm:gap-3.5 flex-shrink-0">
-        {/* Live Date Chip */}
-        <div className="hidden xl:inline-flex items-center gap-2 text-xs font-bold text-slate-600 px-3.5 py-2 rounded-full bg-slate-50 border border-slate-900/[0.04] shadow-subtle">
-          <Calendar className="w-3.5 h-3.5 text-slate-400" />
-          <span>{todayFormatted}</span>
-        </div>
-
-        {/* Notification Bell Button */}
-        <button
-          type="button"
-          title="Notifications"
-          className="relative p-2.5 rounded-full text-slate-500 hover:text-slate-900 bg-slate-50 hover:bg-slate-100/80 border border-slate-900/[0.04] shadow-subtle transition-all cursor-pointer"
-        >
-          <Bell className="w-4 h-4" />
-          <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-blue-600 ring-2 ring-white" />
-        </button>
-
-        {/* Quick Udhar (Give Credit) Button */}
-        {onOpenCreditModal && (
-          <Button
-            variant="creditGradient"
-            size="md"
-            onClick={onOpenCreditModal}
-            icon={ArrowUpRight}
-            className="hidden sm:inline-flex rounded-full shadow-button"
-          >
-            + Give Credit
-          </Button>
-        )}
-
-        {/* Quick Jama (Take Payment) Button */}
-        {onOpenPaymentModal && (
-          <Button
-            variant="paymentGradient"
-            size="md"
-            onClick={onOpenPaymentModal}
-            icon={ArrowDownLeft}
-            className="rounded-full shadow-button"
-          >
-            + Take Payment
-          </Button>
-        )}
-
-        {/* Profile Avatar */}
-        <div className="relative pl-1">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white flex items-center justify-center font-extrabold text-sm shadow-subtle border border-slate-700/50 cursor-pointer">
+          <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(135deg,#0f172a,#1e293b,#2563eb)] text-sm font-black text-white shadow-[0_18px_30px_-18px_rgba(15,23,42,0.9)]">
             {user?.name ? user.name.charAt(0).toUpperCase() : 'O'}
+            <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-white bg-emerald-500" />
           </div>
-          <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-white" />
         </div>
       </div>
     </header>

@@ -6,7 +6,7 @@ import app from './app.js';
 import connectDB from './config/db.js';
 import { connectRedis } from './config/redis.js';
 
-const PORT = process.env.PORT || 5000;
+const PORT = Number(process.env.PORT) || 5000;
 
 /**
  * Boots the server:
@@ -14,16 +14,28 @@ const PORT = process.env.PORT || 5000;
  * 2. Initializes Redis In-Memory Cache (with graceful fallback)
  * 3. Starts HTTP server listener on the specified PORT
  */
-const startServer = async () => {
+const startServer = async (requestedPort = PORT) => {
   // Connect to MongoDB Atlas
   await connectDB();
 
   // Initialize Redis Cache Client
   connectRedis();
 
-  const server = app.listen(PORT, () => {
-    console.log(`[Server] Credit Management API running in [${process.env.NODE_ENV || 'development'}] mode on port ${PORT}`);
-    console.log(`[Server] Health Check available at http://localhost:${PORT}/api/v1/health`);
+  const server = app.listen(requestedPort, () => {
+    console.log(`[Server] Credit Management API running in [${process.env.NODE_ENV || 'development'}] mode on port ${requestedPort}`);
+    console.log(`[Server] Health Check available at http://localhost:${requestedPort}/api/v1/health`);
+  });
+
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      const nextPort = requestedPort + 1;
+      console.warn(`[Server] Port ${requestedPort} is busy. Retrying on ${nextPort}...`);
+      server.close(() => startServer(nextPort));
+      return;
+    }
+
+    console.error(`[Fatal Error] ${err.message}`);
+    process.exit(1);
   });
 
   // Handle Unhandled Promise Rejections (e.g. database disconnects after startup)

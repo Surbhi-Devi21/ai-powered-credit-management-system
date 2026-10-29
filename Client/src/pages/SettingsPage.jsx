@@ -93,215 +93,169 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="space-y-8 sm:space-y-10 max-w-4xl mx-auto pb-16">
-      {/* Header Banner Card */}
+    <div className="mx-auto max-w-5xl space-y-6 pb-16 sm:space-y-8">
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
+        initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 p-8 sm:p-10 rounded-3xl bg-white border border-slate-100/80 shadow-card hover:shadow-cardHover transition-all duration-300"
+        transition={{ duration: 0.35 }}
+        className="overflow-hidden rounded-[32px] border border-slate-200/80 bg-[linear-gradient(135deg,#ffffff_0%,#f8fafc_40%,#eef2ff_100%)] p-6 shadow-[0_30px_80px_-38px_rgba(15,23,42,0.28)] sm:p-8"
       >
-        <div className="flex items-center gap-5 sm:gap-6">
-          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white flex items-center justify-center font-extrabold text-2xl sm:text-3xl shadow-sm border border-slate-700/50">
-            {user?.name ? user.name.charAt(0).toUpperCase() : 'O'}
-          </div>
-          <div className="space-y-1.5">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 ring-4 ring-emerald-50" />
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">
-                Owner Account
-              </span>
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-4">
+            <div className="flex h-16 w-16 items-center justify-center rounded-[22px] bg-[linear-gradient(135deg,#0f172a,#1e293b,#2563eb)] text-2xl font-black text-white shadow-[0_20px_30px_-20px_rgba(15,23,42,0.9)]">
+              {user?.name ? user.name.charAt(0).toUpperCase() : 'O'}
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-              {user?.businessName || 'My Retail Store'}
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-500 font-medium">{user?.email}</p>
-          </div>
-        </div>
 
-        <Button
-          variant="secondary"
-          size="md"
-          onClick={logout}
-          icon={LogOut}
-          className="self-start sm:self-auto text-rose-600 hover:text-rose-700 hover:bg-rose-50 border-rose-200/80 rounded-full"
-        >
-          Sign Out
-        </Button>
+            <div>
+              <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-[0.18em] text-emerald-700">
+                <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                Owner account
+              </div>
+              <h2 className="text-2xl font-black tracking-[-0.06em] text-slate-900 sm:text-3xl">
+                {user?.businessName || 'My Retail Store'}
+              </h2>
+              <p className="mt-1 text-sm font-medium text-slate-500">{user?.email}</p>
+            </div>
+          </div>
+
+          <Button
+            variant="secondary"
+            size="md"
+            onClick={logout}
+            icon={LogOut}
+            className="rounded-full border border-slate-200 bg-white text-rose-600 hover:bg-rose-50 hover:text-rose-700"
+          >
+            Sign out
+          </Button>
+        </div>
       </motion.div>
 
-      {/* Profile & Business Details Card */}
-      <Card className="p-8 sm:p-10 space-y-8">
-        <div className="space-y-1.5 pb-6 border-b border-slate-100">
-          <h3 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-blue-50 text-brand-accent flex items-center justify-center">
-              <Store className="w-4 h-4" />
-            </div>
-            <span>Store & Profile Settings</span>
-          </h3>
-          <p className="text-xs sm:text-sm text-slate-500 font-medium pl-10">
-            Manage your retail store name, business category, and contact details.
-          </p>
+      <Card className="space-y-7 p-6 sm:p-8">
+        <div className="flex items-center gap-3 border-b border-slate-200/80 pb-5">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
+            <Store className="h-4 w-4" />
+          </div>
+          <div>
+            <h3 className="text-lg font-black tracking-[-0.05em] text-slate-900">Store & profile settings</h3>
+            <p className="text-xs font-medium text-slate-500">Manage the shop identity and contact details.</p>
+          </div>
         </div>
 
         <form onSubmit={handleProfileSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <Input
-              label="Owner Full Name"
+              label="Owner full name"
               type="text"
               name="name"
               value={profileData.name}
-              onChange={(e) =>
-                setProfileData((prev) => ({ ...prev, name: e.target.value }))
-              }
+              onChange={(e) => setProfileData((prev) => ({ ...prev, name: e.target.value }))}
               icon={User}
               required
             />
 
             <Input
-              label="Business / Store Name"
+              label="Business / store name"
               type="text"
               name="businessName"
               value={profileData.businessName}
-              onChange={(e) =>
-                setProfileData((prev) => ({ ...prev, businessName: e.target.value }))
-              }
+              onChange={(e) => setProfileData((prev) => ({ ...prev, businessName: e.target.value }))}
               icon={Store}
               required
             />
 
             <div className="space-y-2">
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
-                Business Category
+              <label className="block text-[10px] font-extrabold uppercase tracking-[0.18em] text-slate-500">
+                Business category
               </label>
-              <div className="relative rounded-2xl shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
-                  <Building className="w-4 h-4" />
+              <div className="relative">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
+                  <Building className="h-4 w-4" />
                 </div>
                 <select
                   value={profileData.businessCategory}
-                  onChange={(e) =>
-                    setProfileData((prev) => ({
-                      ...prev,
-                      businessCategory: e.target.value,
-                    }))
-                  }
-                  className="block w-full bg-white text-slate-900 text-sm border border-slate-200/90 rounded-2xl pl-11 pr-8 h-11 sm:h-12 focus:outline-none focus:border-brand-accent focus:ring-4 focus:ring-brand-accent/10 cursor-pointer shadow-sm font-medium transition-all"
+                  onChange={(e) => setProfileData((prev) => ({ ...prev, businessCategory: e.target.value }))}
+                  className="block h-12 w-full rounded-[18px] border border-slate-200 bg-slate-50 pl-11 pr-10 text-sm font-medium text-slate-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] outline-none transition focus:border-blue-400 focus:bg-white focus:ring-4 focus:ring-blue-100"
                 >
-                  <option value="kirana">Kirana / Grocery Store</option>
-                  <option value="medical">Medical / Pharmacy</option>
-                  <option value="electronics">Electronics / Mobile</option>
-                  <option value="clothing">Garments / Clothing</option>
-                  <option value="restaurant">Canteen / Restaurant</option>
-                  <option value="stationery">Stationery & Books</option>
-                  <option value="other">Other Retail Business</option>
+                  <option value="kirana">Kirana / grocery store</option>
+                  <option value="medical">Medical / pharmacy</option>
+                  <option value="electronics">Electronics / mobile</option>
+                  <option value="clothing">Garments / clothing</option>
+                  <option value="restaurant">Canteen / restaurant</option>
+                  <option value="stationery">Stationery & books</option>
+                  <option value="other">Other retail business</option>
                 </select>
               </div>
             </div>
 
             <Input
-              label="Mobile Phone Number"
+              label="Mobile phone number"
               type="tel"
               name="phone"
               value={profileData.phone}
-              onChange={(e) =>
-                setProfileData((prev) => ({ ...prev, phone: e.target.value }))
-              }
+              onChange={(e) => setProfileData((prev) => ({ ...prev, phone: e.target.value }))}
               prefix="+91"
               required
             />
           </div>
 
-          <div className="pt-6 border-t border-slate-100 flex justify-end">
-            <Button
-              type="submit"
-              variant="primary"
-              size="lg"
-              isLoading={profileLoading}
-              icon={Save}
-              className="rounded-full shadow-sm hover:shadow-md transition-all"
-            >
-              Save Profile Changes
+          <div className="flex justify-end border-t border-slate-200/80 pt-5">
+            <Button type="submit" variant="primary" size="lg" isLoading={profileLoading} icon={Save} className="rounded-full">
+              Save profile changes
             </Button>
           </div>
         </form>
       </Card>
 
-      {/* Security & Password Card */}
-      <Card className="p-8 sm:p-10 space-y-8">
-        <div className="space-y-1.5 pb-6 border-b border-slate-100">
-          <h3 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center">
-              <Lock className="w-4 h-4" />
-            </div>
-            <span>Account Security & Password</span>
-          </h3>
-          <p className="text-xs sm:text-sm text-slate-500 font-medium pl-10">
-            Update your account login password to keep your store finances safe.
-          </p>
+      <Card className="space-y-7 p-6 sm:p-8">
+        <div className="flex items-center gap-3 border-b border-slate-200/80 pb-5">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-rose-50 text-rose-600">
+            <Lock className="h-4 w-4" />
+          </div>
+          <div>
+            <h3 className="text-lg font-black tracking-[-0.05em] text-slate-900">Account security</h3>
+            <p className="text-xs font-medium text-slate-500">Keep your store data secure with a stronger password.</p>
+          </div>
         </div>
 
         <form onSubmit={handlePasswordSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
             <Input
-              label="Current Password"
+              label="Current password"
               type="password"
               name="currentPassword"
               value={passwordData.currentPassword}
-              onChange={(e) =>
-                setPasswordData((prev) => ({
-                  ...prev,
-                  currentPassword: e.target.value,
-                }))
-              }
+              onChange={(e) => setPasswordData((prev) => ({ ...prev, currentPassword: e.target.value }))}
               placeholder="••••••••"
               icon={Lock}
               required
             />
 
             <Input
-              label="New Password"
+              label="New password"
               type="password"
               name="newPassword"
               value={passwordData.newPassword}
-              onChange={(e) =>
-                setPasswordData((prev) => ({
-                  ...prev,
-                  newPassword: e.target.value,
-                }))
-              }
+              onChange={(e) => setPasswordData((prev) => ({ ...prev, newPassword: e.target.value }))}
               placeholder="Min. 6 chars"
               icon={Lock}
               required
             />
 
             <Input
-              label="Confirm New Password"
+              label="Confirm password"
               type="password"
               name="confirmPassword"
               value={passwordData.confirmPassword}
-              onChange={(e) =>
-                setPasswordData((prev) => ({
-                  ...prev,
-                  confirmPassword: e.target.value,
-                }))
-              }
+              onChange={(e) => setPasswordData((prev) => ({ ...prev, confirmPassword: e.target.value }))}
               placeholder="Repeat password"
               icon={Lock}
               required
             />
           </div>
 
-          <div className="pt-6 border-t border-slate-100 flex justify-end">
-            <Button
-              type="submit"
-              variant="secondary"
-              size="lg"
-              isLoading={passwordLoading}
-              icon={ShieldCheck}
-              className="rounded-full shadow-sm hover:shadow-md transition-all"
-            >
-              Update Password
+          <div className="flex justify-end border-t border-slate-200/80 pt-5">
+            <Button type="submit" variant="secondary" size="lg" isLoading={passwordLoading} icon={ShieldCheck} className="rounded-full">
+              Update password
             </Button>
           </div>
         </form>

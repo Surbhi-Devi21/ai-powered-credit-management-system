@@ -153,33 +153,26 @@ export default function CustomerDetailPage() {
   }
 
   return (
-    <div className="space-y-6 sm:space-y-7 max-w-6xl mx-auto pb-16">
-      {/* Back Navigation Bar */}
+    <div className="mx-auto max-w-6xl space-y-6 pb-16 sm:space-y-7">
       <div className="flex items-center justify-between">
         <button
           type="button"
           onClick={() => navigate('/customers')}
-          className="group inline-flex items-center gap-2 text-xs font-medium text-slate-500 hover:text-slate-900 transition-colors py-1 cursor-pointer select-none"
+          className="group inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500 transition-all hover:border-slate-300 hover:text-slate-900"
         >
-          <ArrowLeft className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-900 group-hover:-translate-x-0.5 transition-all" />
-          <span>Back to Customer Directory</span>
+          <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-0.5" />
+          Back to customers
         </button>
       </div>
 
-      {/* Customer Hero Balance Header */}
       <BalanceHeader
         customer={customer}
         onOpenCredit={() => setIsCreditOpen(true)}
         onOpenPayment={() => setIsPaymentOpen(true)}
       />
 
-      {/* Financial Summary Metric Cards */}
-      <LedgerSummary
-        customer={customer}
-        transactionCount={totalCount}
-      />
+      <LedgerSummary customer={customer} transactionCount={totalCount} />
 
-      {/* Filters & Search Toolbar */}
       <TransactionFilters
         activeType={typeFilter}
         onTypeChange={(type) => {
@@ -204,40 +197,26 @@ export default function CustomerDetailPage() {
         onClearFilters={handleClearFilters}
       />
 
-      {/* Transaction Statement View */}
       {loading ? (
         <div className="space-y-4">
           <Skeleton variant="tableRow" count={5} />
         </div>
       ) : transactions.length === 0 ? (
-        <EmptyLedger
-          onOpenCredit={() => setIsCreditOpen(true)}
-          onOpenPayment={() => setIsPaymentOpen(true)}
-        />
+        <EmptyLedger onOpenCredit={() => setIsCreditOpen(true)} onOpenPayment={() => setIsPaymentOpen(true)} />
       ) : (
         <div className="space-y-6">
-          {/* Desktop Table View */}
           <div className="hidden md:block">
-            <LedgerTable
-              transactions={transactions}
-              onDelete={handleDeleteTransaction}
-            />
+            <LedgerTable transactions={transactions} onDelete={handleDeleteTransaction} />
           </div>
 
-          {/* Mobile Card List View */}
-          <div className="md:hidden space-y-4">
+          <div className="space-y-4 md:hidden">
             <AnimatePresence mode="popLayout">
               {transactions.map((tx) => (
-                <TransactionCard
-                  key={tx._id}
-                  transaction={tx}
-                  onDelete={handleDeleteTransaction}
-                />
+                <TransactionCard key={tx._id} transaction={tx} onDelete={handleDeleteTransaction} />
               ))}
             </AnimatePresence>
           </div>
 
-          {/* Statement Pagination */}
           {totalPages > 1 && (
             <Pagination
               currentPage={page}
@@ -250,7 +229,6 @@ export default function CustomerDetailPage() {
         </div>
       )}
 
-      {/* Give Credit (Udhar) Modal */}
       <CreditModal
         isOpen={isCreditOpen}
         onClose={() => setIsCreditOpen(false)}
@@ -259,7 +237,6 @@ export default function CustomerDetailPage() {
         isLoading={submitting}
       />
 
-      {/* Take Payment (Jama) Modal */}
       <PaymentModal
         isOpen={isPaymentOpen}
         onClose={() => setIsPaymentOpen(false)}

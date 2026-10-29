@@ -11,7 +11,9 @@ import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import CustomersPage from './pages/CustomersPage';
 import CustomerDetailPage from './pages/CustomerDetailPage';
+import RemindersPage from './pages/RemindersPage';
 import SettingsPage from './pages/SettingsPage';
+import AiAssistantPage from './pages/AiAssistantPage';
 
 // Placeholder views for upcoming modules with Linear / Mercury empty state styling
 const PlaceholderView = ({ title, subtitle, nextModule }) => {
@@ -90,26 +92,8 @@ function AppContent() {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/customers" element={<CustomersPage />} />
         <Route path="/customers/:id" element={<CustomerDetailPage />} />
-        <Route
-          path="/reminders"
-          element={
-            <PlaceholderView
-              title="WhatsApp Payment Reminders & Overdue Tracker"
-              subtitle="Generate pre-filled, polite WhatsApp reminders for overdue accounts with single-click delivery."
-              nextModule="Module 7: Reminders Module"
-            />
-          }
-        />
-        <Route
-          path="/ai-insights"
-          element={
-            <PlaceholderView
-              title="AI Business Assistant (OpenRouter Grounded)"
-              subtitle="Ask natural language questions about your live store collections, top debtor risks, and sales velocity."
-              nextModule="Module 8: AI Business Insights"
-            />
-          }
-        />
+        <Route path="/reminders" element={<RemindersPage />} />
+        <Route path="/ai-insights" element={<AiAssistantPage />} />
         <Route path="/settings" element={<SettingsPage />} />
       </Route>
 

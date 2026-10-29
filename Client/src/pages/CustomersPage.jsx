@@ -108,71 +108,68 @@ export default function CustomersPage() {
     }).format(val);
 
   return (
-    <div className="space-y-8 sm:space-y-10 max-w-7xl mx-auto pb-16">
-      {/* Top Header & Action Panel */}
-      <div className="p-7 sm:p-8 rounded-3xl bg-white border border-slate-900/[0.06] shadow-card flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div className="space-y-1">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-            Customer Khata Accounts
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-500 font-medium">
-            Manage your retail store debtors, balances, contact profiles, and payment histories.
-          </p>
-        </div>
+    <div className="mx-auto max-w-7xl space-y-6 pb-16 sm:space-y-8">
+      <div className="overflow-hidden rounded-[32px] border border-slate-200/80 bg-[linear-gradient(135deg,#ffffff_0%,#f8fafc_35%,#eef2ff_100%)] p-6 shadow-[0_30px_80px_-38px_rgba(15,23,42,0.28)] sm:p-8">
+        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+          <div className="space-y-3">
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.18em] text-slate-500">
+              <span className="h-2 w-2 rounded-full bg-emerald-500" />
+              Customer portfolio
+            </div>
+            <div>
+              <h2 className="text-3xl font-black tracking-[-0.06em] text-slate-900 sm:text-4xl">
+                Customer Khata Accounts
+              </h2>
+              <p className="mt-2 max-w-2xl text-sm font-medium text-slate-600">
+                Manage debtors, balances, contact profiles, and payment histories in a cleaner, premium workspace.
+              </p>
+            </div>
+          </div>
 
-        {/* Action Button: Dark Rounded-Full Primary Button */}
-        <div className="flex items-center gap-3 self-start md:self-auto">
           <Button
             variant="primary"
             size="lg"
             onClick={() => setIsFormOpen(true)}
             icon={UserPlus}
-            className="rounded-full shadow-button"
+            className="rounded-full shadow-[0_16px_30px_-18px_rgba(15,23,42,0.75)]"
           >
             + Add New Customer
           </Button>
         </div>
       </div>
 
-      {/* Directory Quick Metric Cards (Typography-First, Mercury/Linear Style) */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
-        <div className="p-6 sm:p-7 rounded-3xl bg-white border border-slate-900/[0.06] shadow-card space-y-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="rounded-[26px] border border-slate-200/80 bg-white p-5 shadow-[0_18px_45px_-28px_rgba(15,23,42,0.22)] sm:p-6">
           <div className="flex items-center justify-between text-slate-400">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
-              Total Market Dues
-            </span>
-            <TrendingUp className="w-4 h-4 text-rose-500" />
+            <span className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-slate-500">Total market dues</span>
+            <TrendingUp className="h-4 w-4 text-rose-500" />
           </div>
-          <div className="text-3xl sm:text-4xl font-extrabold text-rose-600 tabular-nums tracking-tight">
+          <div className="mt-5 tabular-nums text-3xl font-black tracking-[-0.06em] text-rose-600 sm:text-4xl">
             {formatCurrency(stats.totalOutstanding)}
           </div>
-          <p className="text-xs text-slate-400 font-medium">Pending collection across active accounts</p>
+          <p className="mt-2 text-xs font-medium text-slate-500">Pending collection across active accounts</p>
         </div>
 
-        <div className="p-6 sm:p-7 rounded-3xl bg-white border border-slate-900/[0.06] shadow-card space-y-3">
+        <div className="rounded-[26px] border border-slate-200/80 bg-white p-5 shadow-[0_18px_45px_-28px_rgba(15,23,42,0.22)] sm:p-6">
           <div className="flex items-center justify-between text-slate-400">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
-              Total Customers
-            </span>
-            <Users className="w-4 h-4 text-slate-400" />
+            <span className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-slate-500">Total customers</span>
+            <Users className="h-4 w-4 text-slate-500" />
           </div>
-          <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 tabular-nums tracking-tight">
+          <div className="mt-5 tabular-nums text-3xl font-black tracking-[-0.06em] text-slate-900 sm:text-4xl">
             {stats.totalCustomers}
           </div>
-          <p className="text-xs text-slate-400 font-medium">Registered in store directory</p>
+          <p className="mt-2 text-xs font-medium text-slate-500">Registered in store directory</p>
         </div>
 
-        <div className="p-6 sm:p-7 rounded-3xl bg-white border border-slate-900/[0.06] shadow-card space-y-3">
+        <div className="rounded-[26px] border border-slate-200/80 bg-white p-5 shadow-[0_18px_45px_-28px_rgba(15,23,42,0.22)] sm:p-6">
           <div className="flex items-center justify-between text-slate-400">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
-              Active Debtors
-            </span>
-            <CheckCircle2 className="w-4 h-4 text-amber-500" />
+            <span className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-slate-500">Active debtors</span>
+            <CheckCircle2 className="h-4 w-4 text-amber-500" />
           </div>
-          <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 tabular-nums tracking-tight">
+          <div className="mt-5 tabular-nums text-3xl font-black tracking-[-0.06em] text-slate-900 sm:text-4xl">
             {stats.activeDebtors}
           </div>
-          <p className="text-xs text-slate-400 font-medium">Customers currently with pending credit</p>
+          <p className="mt-2 text-xs font-medium text-slate-500">Customers currently with pending credit</p>
         </div>
       </div>
 

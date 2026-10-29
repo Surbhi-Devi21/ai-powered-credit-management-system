@@ -88,50 +88,42 @@ export default function KpiGrid({ kpis }) {
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 sm:gap-8">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-5">
       {kpiCards.map((kpi, index) => {
         const Icon = kpi.icon;
         return (
           <motion.div
             key={kpi.title}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: index * 0.05 }}
+            initial={{ opacity: 0, y: 20, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.35, delay: index * 0.06 }}
+            whileHover={{ y: -4, scale: 1.01 }}
           >
-            <Card
-              hoverable
-              padding="md"
-              className="flex flex-col justify-between h-full space-y-5"
-            >
-              {/* Header: Title & Colorful Rounded Icon Container */}
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest truncate">
-                  {kpi.title}
-                </span>
-                <div
-                  className={`w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-soft ${kpi.bgIcon}`}
-                >
-                  <Icon className="w-5 h-5" />
+            <div className="group relative h-full overflow-hidden rounded-[26px] border border-slate-200/80 bg-white/90 p-4 shadow-[0_18px_45px_-28px_rgba(15,23,42,0.25)] backdrop-blur-sm transition-all duration-300 hover:shadow-[0_24px_60px_-28px_rgba(15,23,42,0.28)] sm:p-5">
+              <div className="absolute inset-x-6 top-0 h-12 bg-[radial-gradient(circle_at_top,_rgba(37,99,235,0.10),_transparent_70%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+              <div className="relative flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-slate-400">{kpi.title}</p>
+                </div>
+                <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${kpi.bgIcon}`}>
+                  <Icon className="h-5 w-5" />
                 </div>
               </div>
 
-              {/* Middle: Very Large Hero Metric Value */}
-              <div className="space-y-1">
-                <div
-                  className={`text-2xl sm:text-[28px] font-extrabold tabular-nums tracking-tight ${kpi.valueColor}`}
-                >
+              <div className="relative mt-6">
+                <div className={`tabular-nums text-2xl font-black tracking-[-0.06em] sm:text-[2rem] ${kpi.valueColor}`}>
                   {kpi.value}
                 </div>
-                <p className="text-xs text-slate-500 font-medium truncate">{kpi.subtitle}</p>
+                <p className="mt-2 text-[11px] font-medium text-slate-500">{kpi.subtitle}</p>
               </div>
 
-              {/* Bottom: Semantic Status Badge */}
-              <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+              <div className="relative mt-5 border-t border-slate-200/80 pt-3">
                 <Badge variant={kpi.badgeVariant} size="sm">
                   {kpi.badgeText}
                 </Badge>
               </div>
-            </Card>
+            </div>
           </motion.div>
         );
       })}

@@ -4,81 +4,89 @@
 
 @layer base {
   :root {
-    --bg-canvas: #F6F8FC;
+    --bg-canvas: #FAFAFA;
+    --bg-canvas-strong: #F3F4F6;
     --bg-card: #FFFFFF;
     --text-primary: #111827;
-    --text-secondary: #64748B;
-    --border-saas: rgba(15, 23, 42, 0.06);
-    --border-subtle: rgba(15, 23, 42, 0.03);
-    --shadow-soft: 0 4px 20px -2px rgba(15, 23, 42, 0.03), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
-    --shadow-card-hover: 0 12px 32px -4px rgba(15, 23, 42, 0.06), 0 4px 10px -2px rgba(15, 23, 42, 0.02);
+    --text-secondary: #6B7280;
+    --text-muted: #9CA3AF;
+    --border-saas: rgba(17, 24, 39, 0.08);
+    --border-subtle: rgba(17, 24, 39, 0.04);
+    --shadow-soft: 0 18px 45px -28px rgba(15, 23, 42, 0.28), 0 8px 18px -12px rgba(15, 23, 42, 0.12);
+    --shadow-card-hover: 0 20px 60px -22px rgba(15, 23, 42, 0.26), 0 8px 18px -10px rgba(15, 23, 42, 0.08);
     --radius-card: 28px;
-    --radius-input: 16px;
+    --radius-input: 18px;
     --radius-button: 9999px;
   }
 
   html {
-    font-family: 'Plus Jakarta Sans', Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     -webkit-tap-highlight-color: transparent;
     scroll-behavior: smooth;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #F6F8FC;
-    color: #111827;
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
   }
 
   body {
-    background-color: #F6F8FC;
-    color: #111827;
+    background:
+      radial-gradient(circle at top left, rgba(37, 99, 235, 0.06), transparent 24%),
+      radial-gradient(circle at top right, rgba(168, 85, 247, 0.05), transparent 20%),
+      linear-gradient(180deg, #FAFAFA 0%, #F7F8FB 100%);
+    color: var(--text-primary);
     min-height: 100vh;
     overflow-x: hidden;
     line-height: 1.5;
-    letter-spacing: -0.011em;
+    letter-spacing: -0.012em;
   }
 
-  /* Improved Typography Scale & Hierarchy */
   h1, .saas-h1 {
-    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-size: clamp(2.2rem, 4vw, 4rem);
     font-weight: 800;
-    line-height: 1.2;
-    letter-spacing: -0.035em;
+    line-height: 0.98;
+    letter-spacing: -0.06em;
     color: #111827;
   }
 
   h2, .saas-h2 {
-    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
-    font-weight: 800;
-    line-height: 1.25;
-    letter-spacing: -0.03em;
+    font-size: clamp(1.55rem, 2.3vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.05em;
     color: #111827;
   }
 
   h3, .saas-h3 {
-    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    font-size: clamp(1.15rem, 1.5vw, 1.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: #111827;
+  }
+
+  h4, .saas-h4 {
+    font-size: 1.05rem;
     font-weight: 700;
     line-height: 1.35;
     letter-spacing: -0.02em;
     color: #111827;
   }
 
-  h4, .saas-h4 {
-    font-size: 1.0625rem;
-    font-weight: 700;
-    line-height: 1.4;
-    letter-spacing: -0.015em;
-    color: #111827;
-  }
-
   p, .saas-p {
-    color: #64748B;
-    line-height: 1.6;
+    color: var(--text-secondary);
+    line-height: 1.7;
     letter-spacing: -0.01em;
   }
 
-  /* Tabular numbers for clean financial metric alignment */
   .tabular-nums {
     font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  * {
+    box-sizing: border-box;
   }
 }
 

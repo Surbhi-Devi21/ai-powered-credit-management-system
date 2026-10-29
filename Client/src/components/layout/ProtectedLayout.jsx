@@ -19,34 +19,33 @@ export default function ProtectedLayout({
   pageSubtitle,
 }) {
   return (
-    <div className="min-h-screen bg-canvas p-4 sm:p-6 lg:p-8 flex items-start gap-6 sm:gap-8 selection:bg-blue-500 selection:text-white">
-      {/* Desktop Floating Sidebar */}
-      <Sidebar
-        shopName={user?.businessName || 'My Retail Store'}
-        businessCategory={user?.businessCategory || 'Retail'}
-        ownerName={user?.name || 'Store Owner'}
-        onLogout={onLogout}
-      />
-
-      {/* Main Floating Content Canvas */}
-      <div className="flex-1 flex flex-col min-w-0 space-y-6 sm:space-y-8 pb-24 lg:pb-10">
-        {/* Floating Navbar */}
-        <Navbar
-          title={pageTitle}
-          subtitle={pageSubtitle}
-          onOpenCreditModal={onOpenCreditModal}
-          onOpenPaymentModal={onOpenPaymentModal}
-          onOpenSearch={onOpenSearch}
-          user={user}
+    <div className="min-h-screen bg-[#FAFAFA] px-3 py-3 sm:px-5 sm:py-5 lg:px-6 lg:py-6 selection:bg-blue-500 selection:text-white">
+      <div className="mx-auto flex max-w-[1600px] items-start gap-4 sm:gap-6 lg:gap-7">
+        <Sidebar
+          shopName={user?.businessName || 'My Retail Store'}
+          businessCategory={user?.businessCategory || 'Retail'}
+          ownerName={user?.name || 'Store Owner'}
+          onLogout={onLogout}
         />
 
-        {/* Dynamic Page Router Outlet with 12-Column Responsive Flow */}
-        <main className="flex-1 w-full max-w-7xl mx-auto">
-          <Outlet />
-        </main>
+        <div className="flex-1 min-w-0 pb-24 lg:pb-8">
+          <div className="space-y-5 sm:space-y-6">
+            <Navbar
+              title={pageTitle}
+              subtitle={pageSubtitle}
+              onOpenCreditModal={onOpenCreditModal}
+              onOpenPaymentModal={onOpenPaymentModal}
+              onOpenSearch={onOpenSearch}
+              user={user}
+            />
+
+            <main className="w-full max-w-[1500px] mx-auto">
+              <Outlet />
+            </main>
+          </div>
+        </div>
       </div>
 
-      {/* Mobile-Only Navigation & Quick Actions */}
       <FloatingActionButton
         onOpenCreditModal={onOpenCreditModal}
         onOpenPaymentModal={onOpenPaymentModal}
